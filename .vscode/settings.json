@@ -4,5 +4,8 @@
   "tailwindCSS.experimental.classRegex": [
     "([\"'`][^\"'`]*.*?[\"'`])",
     "[\"'`]([^\"'`]*).*?[\"'`]"
-  ]
+  ],
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
 }
