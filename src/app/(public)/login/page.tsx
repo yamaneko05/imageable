@@ -13,12 +13,7 @@ export default function LoginPage() {
     <div className="w-96 px-3">
       <div className="mb-8 text-center text-2xl font-bold">ログイン</div>
       {state?.error && (
-        <Alert>
-          <div className="mb-1 font-bold">ログインできませんでした</div>
-          メールアドレスもしくはパスワードが異なります
-          <br />
-          {state.error.message}
-        </Alert>
+        <Alert variants={{ color: "danger" }}>{state.error.message}</Alert>
       )}
       <form className="mb-6">
         <div className="mb-6">

@@ -1,8 +1,4 @@
-import { tv } from "tailwind-variants";
-
-const input = tv({
-  base: "block w-full rounded border px-3 py-2 focus:outline-blue-300",
-});
+import { input } from "@/variants/inputVariants";
 
 export default function Input({
   attributes,

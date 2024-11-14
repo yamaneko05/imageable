@@ -12,12 +12,7 @@ export default function SignUpPage() {
     <div className="w-96 px-3">
       <div className="mb-8 text-center text-2xl font-bold">新規登録</div>
       {state?.error && (
-        <Alert>
-          <div className="mb-1 font-bold">新規登録できませんでした</div>
-          入力内容を再度ご確認ください
-          <br />
-          {state.error.message}
-        </Alert>
+        <Alert variants={{ color: "danger" }}>{state.error.message}</Alert>
       )}
       <form className="mb-6">
         <div className="mb-6">

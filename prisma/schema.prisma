@@ -34,7 +34,6 @@ model Profile {
   description String?
 }
 
-// model Post
 model Post {
   id          String    @id @default(uuid())
   user        User      @relation(fields: [userId], references: [id])
@@ -46,14 +45,12 @@ model Post {
   likedUsers  Like[]
 }
 
-// model Media
 model Media {
   id     String @id @default(uuid())
   post   Post   @relation(fields: [postId], references: [id])
   postId String @unique
 }
 
-// model Comment
 model Comment {
   id     String @id @default(uuid())
   post   Post   @relation(fields: [postId], references: [id])
@@ -62,7 +59,6 @@ model Comment {
   userId String
 }
 
-// model Like
 model Like {
   post    Post     @relation(fields: [postId], references: [id])
   postId  String

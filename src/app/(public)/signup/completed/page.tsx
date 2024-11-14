@@ -1,4 +1,4 @@
-import LinkButton from "@/components/ui/LinkButton";
+import { LinkButton } from "@/components/ui";
 import { LucideCheckCircle2 } from "lucide-react";
 
 export default function CompletedPage() {
