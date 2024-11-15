@@ -15,6 +15,7 @@ export default function CreatePostForm() {
             attributes={{
               name: "description",
               id: "description",
+              placeholder: "いまどうしてる？",
               rows: 6,
             }}
           />

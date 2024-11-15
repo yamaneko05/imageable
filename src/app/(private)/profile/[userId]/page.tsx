@@ -1,6 +1,8 @@
+import PostCard from "@/components/features/post/PostCard";
 import { Avatar, Button, LinkButton } from "@/components/ui";
 import { authService } from "@/services/authService";
 import { profileService } from "@/services/profileService";
+import { postWithRelation } from "@/types/post";
 import { PrismaClient } from "@prisma/client";
 
 export default async function ProfilePage({
@@ -19,7 +21,7 @@ export default async function ProfilePage({
     },
     include: {
       profile: true,
-      posts: true,
+      posts: postWithRelation,
       _count: {
         select: {
           followedBy: true,
@@ -77,12 +79,9 @@ export default async function ProfilePage({
         <div className="mb-2 text-xl font-bold">{user.profile?.name}</div>
         <div className="">{user.profile?.description}</div>
       </div>
-      <div className="space-y-2">
+      <div className="">
         {user.posts.map((post) => (
-          <div key={post.id} className="">
-            <div className="font-bold">{post.description}</div>
-            <div className="">{post.createdAt.toISOString()}</div>
-          </div>
+          <PostCard key={post.id} post={post} />
         ))}
       </div>
     </>
