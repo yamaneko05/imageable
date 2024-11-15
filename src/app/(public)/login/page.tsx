@@ -1,6 +1,6 @@
 "use client";
 
-import { signin } from "@/actions/auth/signin";
+import { signin } from "@/actions/auth";
 import { Alert, Button, Input, FormLabel } from "@/components/ui";
 import Link from "next/link";
 

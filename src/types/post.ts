@@ -1,6 +1,11 @@
 import { Prisma } from "@prisma/client";
 
-export const postWithRelation = Prisma.validator<Prisma.PostDefaultArgs>()({
+export const postWithRelation = Prisma.validator<Prisma.PostFindManyArgs>()({
+  orderBy: [
+    {
+      createdAt: "desc",
+    },
+  ],
   include: {
     user: {
       include: {

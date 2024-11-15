@@ -25,3 +25,33 @@ export async function signup(_prevState: any, formData: FormData) {
 
   redirect("/signup/confirm-your-email");
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function signin(_prevState: any, formData: FormData) {
+  const supabase = await createClient();
+
+  const credentials = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  };
+
+  const { error } = await supabase.auth.signInWithPassword(credentials);
+
+  if (error) {
+    return { error: error };
+  }
+
+  redirect("/timeline");
+}
+
+export async function signout() {
+  const supabase = await createClient();
+
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    redirect("/error");
+  }
+
+  redirect("/login");
+}

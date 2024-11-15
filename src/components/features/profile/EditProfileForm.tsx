@@ -3,7 +3,7 @@
 import { Profile } from "@prisma/client";
 import { Alert, Button, FormLabel, Input, Textarea } from "@/components/ui";
 import { useActionState } from "react";
-import { update } from "@/actions/profile/update";
+import { update } from "@/actions/profile";
 
 export default function EditProfileForm({ profile }: { profile: Profile }) {
   const [state, dispatch, isPending] = useActionState(update, undefined);

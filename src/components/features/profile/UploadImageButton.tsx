@@ -1,6 +1,6 @@
 "use client";
 
-import { uploadImage } from "@/actions/profile/uploadImage";
+import { uploadImage } from "@/actions/profile";
 import { Alert, Avatar, InputButton } from "@/components/ui";
 import { ChangeEvent, useState } from "react";
 

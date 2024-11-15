@@ -1,6 +1,6 @@
 "use client";
 
-import { signup } from "@/actions/auth/signup";
+import { signup } from "@/actions/auth";
 import { Alert, Button, Input, FormLabel } from "@/components/ui";
 import Link from "next/link";
 import { useActionState } from "react";

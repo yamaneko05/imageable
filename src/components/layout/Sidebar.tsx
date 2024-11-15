@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../ui/Button";
-import { signout } from "@/actions/auth/signout";
+import { signout } from "@/actions/auth";
 
 const navItems = [
   {

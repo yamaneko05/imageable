@@ -1,6 +1,6 @@
 "use client";
 
-import { createPostAction } from "@/actions/post/createPostAction";
+import { createPostAction } from "@/actions/post";
 import { Button, Textarea } from "@/components/ui";
 import { useActionState } from "react";
 

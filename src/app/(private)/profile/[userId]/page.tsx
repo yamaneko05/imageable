@@ -32,6 +32,19 @@ export default async function ProfilePage({
     },
   });
 
+  const likedByLoginUserPosts = await prisma.like.findMany({
+    select: {
+      postId: true,
+    },
+    where: {
+      userId: loginUserId,
+    },
+  });
+
+  const likedByLoginUserPostIds = likedByLoginUserPosts.map(
+    (post) => post.postId,
+  );
+
   return (
     <>
       <div className="mb-4">
@@ -81,7 +94,11 @@ export default async function ProfilePage({
       </div>
       <div className="">
         {user.posts.map((post) => (
-          <PostCard key={post.id} post={post} />
+          <PostCard
+            key={post.id}
+            post={post}
+            likedByLoginUser={likedByLoginUserPostIds.includes(post.id)}
+          />
         ))}
       </div>
     </>
