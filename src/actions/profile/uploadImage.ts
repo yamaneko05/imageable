@@ -6,8 +6,6 @@ import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export async function uploadImage(image: File) {
-  // const image = formData.get("image") as File;
-
   const { path } = await storageService.uploadImage(image);
 
   const loginUserId = await authService.getLoginUserId();

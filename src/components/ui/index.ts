@@ -6,3 +6,4 @@ export { default as LinkButton } from "./LinkButton";
 export { default as PageHeading } from "./PageHeading";
 export { default as Textarea } from "./Textarea";
 export { default as InputButton } from "./InputButton";
+export { default as Avatar } from "./Avatar";

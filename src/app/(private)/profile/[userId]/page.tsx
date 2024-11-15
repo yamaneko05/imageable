@@ -1,8 +1,7 @@
-import { Button, LinkButton } from "@/components/ui";
+import { Avatar, Button, LinkButton } from "@/components/ui";
 import { authService } from "@/services/authService";
 import { profileService } from "@/services/profileService";
 import { PrismaClient } from "@prisma/client";
-import Image from "next/image";
 
 export default async function ProfilePage({
   params,
@@ -35,12 +34,9 @@ export default async function ProfilePage({
     <>
       <div className="mb-4">
         <div className="mb-2 flex items-center gap-8">
-          <Image
+          <Avatar
             src={await profileService.getImageUrl(user!.profile!.image)}
-            alt=""
-            className="rounded-full"
-            width={96}
-            height={96}
+            size={96}
           />
           <div className="">
             <div className="mb-4 grid grid-cols-3">

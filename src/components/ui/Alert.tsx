@@ -2,7 +2,7 @@ import { LucideAlertCircle, LucideCheckCircle2 } from "lucide-react";
 import { tv, VariantProps } from "tailwind-variants";
 
 const alert = tv({
-  base: "mb-6 flex gap-2 rounded-lg p-3",
+  base: "mb-4 flex gap-2 rounded-lg p-3",
   variants: {
     color: {
       danger: "bg-red-200",
