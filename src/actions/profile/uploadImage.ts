@@ -1,28 +1,28 @@
 "use server";
 
 import { authService } from "@/services/authService";
+import { storageService } from "@/services/storageService";
 import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function update(_prevState: any, formData: FormData) {
-  const prisma = new PrismaClient();
+export async function uploadImage(image: File) {
+  // const image = formData.get("image") as File;
+
+  const { path } = await storageService.uploadImage(image);
 
   const loginUserId = await authService.getLoginUserId();
 
-  const data = {
-    name: formData.get("name") as string,
-    description: formData.get("description") as string,
-  };
+  const prisma = new PrismaClient();
 
   await prisma.profile.update({
     where: {
       userId: loginUserId,
     },
-    data: data,
+    data: {
+      image: path,
+    },
   });
 
   revalidatePath("/profile/edit");
-
   return { success: true };
 }

@@ -1,7 +1,7 @@
 import EditProfileForm from "@/components/features/profile/EditProfileForm";
 import UploadImageButton from "@/components/features/profile/UploadImageButton";
 import { PageHeading } from "@/components/ui";
-import { getLoginUserId } from "@/services/authService";
+import { authService } from "@/services/authService";
 import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
 import { profileService } from "@/services/profileService";
@@ -9,7 +9,7 @@ import { profileService } from "@/services/profileService";
 export default async function ProfilePage() {
   const prisma = new PrismaClient();
 
-  const loginUserId = await getLoginUserId();
+  const loginUserId = await authService.getLoginUserId();
 
   const profile = await prisma.profile.findUnique({
     where: {
@@ -29,9 +29,7 @@ export default async function ProfilePage() {
             width={96}
             height={96}
           />
-          <form>
-            <UploadImageButton />
-          </form>
+          <UploadImageButton />
         </div>
         <EditProfileForm profile={profile!} />
       </div>

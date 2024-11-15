@@ -1,5 +1,5 @@
 import { Button, LinkButton } from "@/components/ui";
-import { getLoginUserId } from "@/services/authService";
+import { authService } from "@/services/authService";
 import { profileService } from "@/services/profileService";
 import { PrismaClient } from "@prisma/client";
 import Image from "next/image";
@@ -12,7 +12,7 @@ export default async function ProfilePage({
   const prisma = new PrismaClient();
   const { userId } = await params;
 
-  const loginUserId = await getLoginUserId();
+  const loginUserId = await authService.getLoginUserId();
 
   const user = await prisma.user.findUnique({
     where: {

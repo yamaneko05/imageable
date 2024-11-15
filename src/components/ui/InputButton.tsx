@@ -5,13 +5,13 @@ export default function InputButton({
   children,
   attributes,
   variants,
+  id,
 }: {
   children: React.ReactNode;
   attributes: React.ComponentProps<"input">;
   variants?: VariantProps<typeof button>;
+  id: string;
 }) {
-  const id = crypto.randomUUID();
-
   return (
     <>
       <input {...attributes} id={id} hidden />

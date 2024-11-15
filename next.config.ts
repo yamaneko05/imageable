@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "placehold.jp",
       },
+      {
+        hostname: "msoyplsqlqhobfnanneo.supabase.co",
+      },
     ],
   },
 };
