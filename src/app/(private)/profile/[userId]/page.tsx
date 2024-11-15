@@ -13,7 +13,7 @@ export default async function ProfilePage({
 
   const loginUserId = await authService.getLoginUserId();
 
-  const user = await prisma.user.findUnique({
+  const user = await prisma.user.findUniqueOrThrow({
     where: {
       id: userId,
     },
@@ -35,30 +35,28 @@ export default async function ProfilePage({
       <div className="mb-4">
         <div className="mb-2 flex items-center gap-8">
           <Avatar
-            src={await profileService.getImageUrl(user!.profile!.image)}
+            src={await profileService.getImageUrl(user.profile!.image)}
             size={96}
           />
           <div className="">
             <div className="mb-4 grid grid-cols-3">
               <div className="text-center">
-                <div className="text-xl font-bold">{user!._count.posts}</div>
+                <div className="text-xl font-bold">{user._count.posts}</div>
                 <div className="text-sm">投稿</div>
               </div>
               <div className="text-center">
                 <div className="text-xl font-bold">
-                  {user!._count.followedBy}
+                  {user._count.followedBy}
                 </div>
                 <div className="text-sm">フォロワー</div>
               </div>
               <div className="text-center">
-                <div className="text-xl font-bold">
-                  {user!._count.following}
-                </div>
+                <div className="text-xl font-bold">{user._count.following}</div>
                 <div className="text-sm">フォロー中</div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              {user!.id === loginUserId ? (
+              {user.id === loginUserId ? (
                 <LinkButton
                   attributes={{ href: "/profile/edit" }}
                   variants={{ size: "sm", color: "secondary" }}
@@ -76,11 +74,11 @@ export default async function ProfilePage({
             </div>
           </div>
         </div>
-        <div className="mb-2 text-xl font-bold">{user!.profile?.name}</div>
-        <div className="">{user!.profile?.description}</div>
+        <div className="mb-2 text-xl font-bold">{user.profile?.name}</div>
+        <div className="">{user.profile?.description}</div>
       </div>
       <div className="space-y-2">
-        {user!.posts.map((post) => (
+        {user.posts.map((post) => (
           <div key={post.id} className="">
             <div className="font-bold">{post.description}</div>
             <div className="">{post.createdAt.toISOString()}</div>

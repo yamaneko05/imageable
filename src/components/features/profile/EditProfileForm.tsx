@@ -6,7 +6,6 @@ import { useActionState } from "react";
 import { update } from "@/actions/profile/update";
 
 export default function EditProfileForm({ profile }: { profile: Profile }) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [state, dispatch, isPending] = useActionState(update, undefined);
 
   return (
