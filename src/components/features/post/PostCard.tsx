@@ -2,7 +2,7 @@ import { Avatar } from "@/components/ui";
 import { profileService } from "@/services/profileService";
 import { PostWithRelation } from "@/types/post";
 import dayjs from "@/utils/dayjs";
-import { LucideHeart, LucideMessageCircle } from "lucide-react";
+import PostCardActivities from "./PostCardActivities";
 
 export default async function PostCard({
   post,
@@ -27,19 +27,7 @@ export default async function PostCard({
           </div>
         </div>
         <div className="mb-1">{post.description}</div>
-        <div className="flex gap-3">
-          <div className="flex items-center gap-1">
-            <LucideMessageCircle size={20} />
-            {post._count.comments}
-          </div>
-          <div className="flex items-center gap-1">
-            <LucideHeart
-              size={20}
-              color={likedByLoginUser ? "red" : undefined}
-            />
-            {post._count.likedUsers}
-          </div>
-        </div>
+        <PostCardActivities post={post} likedByLoginUser={likedByLoginUser} />
       </div>
     </div>
   );
