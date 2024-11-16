@@ -40,6 +40,7 @@ export default function PostCardActivities({
           fill={liked ? "red" : "none"}
           onClick={handleClickHeart}
           cursor="pointer"
+          className="active:animate-bounce"
         />
         {likedUserCount}
       </div>

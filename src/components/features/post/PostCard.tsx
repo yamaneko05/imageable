@@ -1,6 +1,6 @@
 import { Avatar } from "@/components/ui";
 import { profileService } from "@/services/profileService";
-import { PostWithRelation } from "@/types/post";
+import { PostWithRelations } from "@/types";
 import dayjs from "@/utils/dayjs";
 import PostCardActivities from "./PostCardActivities";
 
@@ -8,7 +8,7 @@ export default async function PostCard({
   post,
   likedByLoginUser,
 }: {
-  post: PostWithRelation;
+  post: PostWithRelations;
   likedByLoginUser: boolean;
 }) {
   return (

@@ -1,49 +1,23 @@
 import PostCard from "@/components/features/post/PostCard";
 import { Avatar, Button, LinkButton } from "@/components/ui";
 import { authService } from "@/services/authService";
+import { likeService } from "@/services/likeService";
 import { profileService } from "@/services/profileService";
-import { postWithRelation } from "@/types/post";
-import { PrismaClient } from "@prisma/client";
+import { userService } from "@/services/userService";
 
 export default async function ProfilePage({
   params,
 }: {
   params: Promise<{ userId: string }>;
 }) {
-  const prisma = new PrismaClient();
   const { userId } = await params;
 
   const loginUserId = await authService.getLoginUserId();
 
-  const user = await prisma.user.findUniqueOrThrow({
-    where: {
-      id: userId,
-    },
-    include: {
-      profile: true,
-      posts: postWithRelation,
-      _count: {
-        select: {
-          followedBy: true,
-          following: true,
-          posts: true,
-        },
-      },
-    },
-  });
+  const user = await userService.getUserForProfilePage(userId);
 
-  const likedByLoginUserPosts = await prisma.like.findMany({
-    select: {
-      postId: true,
-    },
-    where: {
-      userId: loginUserId,
-    },
-  });
-
-  const likedByLoginUserPostIds = likedByLoginUserPosts.map(
-    (post) => post.postId,
-  );
+  const likedByLoginUserPostIds =
+    await likeService.getLikedPostIdsByUserId(loginUserId);
 
   return (
     <>

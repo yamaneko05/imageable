@@ -1,0 +1,24 @@
+import { Prisma } from "@prisma/client";
+
+export const validators = {
+  postWithRelations: Prisma.validator<Prisma.PostFindManyArgs>()({
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+    ],
+    include: {
+      user: {
+        include: {
+          profile: true,
+        },
+      },
+      _count: {
+        select: {
+          likedUsers: true,
+          comments: true,
+        },
+      },
+    },
+  }),
+};
