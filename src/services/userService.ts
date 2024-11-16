@@ -5,22 +5,9 @@ export const userService = {
   getUserForProfilePage: async (userId: string) => {
     const prisma = new PrismaClient();
 
-    const user = await prisma.user.findUniqueOrThrow({
-      where: {
-        id: userId,
-      },
-      include: {
-        profile: true,
-        posts: validators.postWithRelations,
-        _count: {
-          select: {
-            followedBy: true,
-            following: true,
-            posts: true,
-          },
-        },
-      },
-    });
+    const user = await prisma.user.findUniqueOrThrow(
+      validators.userForProfilePage(userId),
+    );
 
     return user;
   },

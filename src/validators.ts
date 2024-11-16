@@ -21,4 +21,30 @@ export const validators = {
       },
     },
   }),
+  userForProfilePage: function (userId: string) {
+    const validator = Prisma.validator<Prisma.UserFindUniqueOrThrowArgs>()({
+      where: {
+        id: userId,
+      },
+      include: {
+        profile: true,
+        posts: this.postWithRelations,
+        _count: {
+          select: {
+            followedBy: true,
+            following: true,
+            posts: true,
+          },
+        },
+      },
+    });
+
+    return validator;
+  },
+  postsForTimelinePage: function () {
+    const validator = Prisma.validator<Prisma.PostFindManyArgs>()(
+      this.postWithRelations,
+    );
+    return validator;
+  },
 };
