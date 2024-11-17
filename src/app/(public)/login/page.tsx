@@ -35,6 +35,7 @@ export default function LoginPage() {
             disabled: isPending,
           }}
           variants={{ WidthFull: true }}
+          isPending={isPending}
         >
           ログイン
         </Button>

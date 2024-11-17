@@ -16,7 +16,7 @@ export default function SignUpPage() {
           {state.serverError.message}
         </Alert>
       )}
-      <form className="mb-6">
+      <form className="mb-6" action={dispatch}>
         <div className="mb-6">
           <FormField
             id="email"
@@ -49,10 +49,10 @@ export default function SignUpPage() {
         <Button
           attributes={{
             type: "submit",
-            formAction: dispatch,
             disabled: isPending,
           }}
           variants={{ color: "success", WidthFull: true }}
+          isPending={isPending}
         >
           新規登録
         </Button>
