@@ -1,7 +1,7 @@
 "use client";
 
 import { signup } from "@/actions/auth";
-import { Alert, Button, Input, FormLabel } from "@/components/ui";
+import { Alert, Button, FormField } from "@/components/ui";
 import Link from "next/link";
 import { useActionState } from "react";
 
@@ -11,32 +11,39 @@ export default function SignUpPage() {
   return (
     <div className="w-96 px-3">
       <div className="mb-8 text-center text-2xl font-bold">新規登録</div>
-      {state?.error && (
-        <Alert variants={{ color: "danger" }}>{state.error.message}</Alert>
+      {state?.serverError && (
+        <Alert variants={{ color: "danger" }}>
+          {state.serverError.message}
+        </Alert>
       )}
       <form className="mb-6">
         <div className="mb-6">
-          <FormLabel attributes={{ htmlFor: "email" }}>
-            メールアドレス
-          </FormLabel>
-          <Input attributes={{ type: "email", name: "email", id: "email" }} />
+          <FormField
+            id="email"
+            label="メールアドレス"
+            name="email"
+            defaultValue={state?.old?.email}
+            errors={state?.validationError?.email}
+          />
         </div>
         <div className="mb-6">
-          <FormLabel attributes={{ htmlFor: "password" }}>パスワード</FormLabel>
-          <Input
-            attributes={{ type: "password", name: "password", id: "password" }}
+          <FormField
+            id="password"
+            label="パスワード"
+            type="password"
+            name="password"
+            defaultValue={state?.old?.password}
+            errors={state?.validationError?.password}
           />
         </div>
         <div className="mb-8">
-          <FormLabel attributes={{ htmlFor: "password_confirm" }}>
-            パスワード（再入力）
-          </FormLabel>
-          <Input
-            attributes={{
-              type: "password",
-              name: "password_confirm",
-              id: "password_confirm",
-            }}
+          <FormField
+            id="password_confirm"
+            label="パスワード（再入力）"
+            type="password"
+            name="password_confirm"
+            defaultValue={state?.old?.password_confirm}
+            errors={state?.validationError?.password_confirm}
           />
         </div>
         <Button
