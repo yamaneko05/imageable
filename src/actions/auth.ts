@@ -1,6 +1,6 @@
 "use server";
 
-import { signupSchema } from "@/schema";
+import { signinSchema, signupSchema } from "@/schema";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
@@ -35,15 +35,25 @@ export async function signup(_prevState: any, formData: FormData) {
 export async function signin(_prevState: any, formData: FormData) {
   const supabase = await createClient();
 
-  const credentials = {
+  const old = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
   };
 
-  const { error } = await supabase.auth.signInWithPassword(credentials);
+  const validationResult = signinSchema.safeParse(old);
 
-  if (error) {
-    return { error: error };
+  if (validationResult.success) {
+    const { error } = await supabase.auth.signInWithPassword(
+      validationResult.data,
+    );
+    if (error) {
+      return { serverError: error };
+    }
+  } else {
+    return {
+      validationError: validationResult.error.flatten().fieldErrors,
+      old: old,
+    };
   }
 
   redirect("/timeline");

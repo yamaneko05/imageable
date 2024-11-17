@@ -10,3 +10,8 @@ export const signupSchema = z
     message: "パスワードの再入力が一致しません",
     path: ["password_confirm"],
   });
+
+export const signinSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
