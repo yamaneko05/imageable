@@ -15,25 +15,20 @@ export default function LoginPage() {
       {state?.error && (
         <Alert variants={{ color: "danger" }}>{state.error.message}</Alert>
       )}
-      <form className="mb-6">
+      <form className="mb-6" action={dispatch}>
         <div className="mb-6">
           <FormLabel attributes={{ htmlFor: "email" }}>
             メールアドレス
           </FormLabel>
-          <Input attributes={{ type: "email", name: "email", id: "email" }} />
+          <Input type="email" name="email" id="email" />
         </div>
         <div className="mb-8">
           <FormLabel attributes={{ htmlFor: "password" }}>パスワード</FormLabel>
-          <Input
-            attributes={{ type: "password", name: "password", id: "password" }}
-          />
+          <Input type="password" name="password" id="password" />
         </div>
         <Button
-          attributes={{
-            type: "submit",
-            formAction: dispatch,
-            disabled: isPending,
-          }}
+          type="submit"
+          disabled={isPending}
           variants={{ WidthFull: true }}
           isPending={isPending}
         >

@@ -1,33 +1,20 @@
 import FormLabel from "@/components/ui/FormLabel";
-import Input from "@/components/ui/Input";
 
 export default function FormField({
+  children,
   label,
-  type = "text",
-  name,
   id,
-  defaultValue,
   errors,
 }: {
+  children: React.ReactNode;
   label: string;
-  type?: React.HTMLInputTypeAttribute;
-  name: string;
   id: string;
-  defaultValue?: string;
   errors?: string[];
 }) {
   return (
     <>
       <FormLabel attributes={{ htmlFor: id }}>{label}</FormLabel>
-      <Input
-        attributes={{
-          type,
-          name,
-          id,
-          defaultValue,
-        }}
-        error={errors !== undefined}
-      />
+      {children}
       {errors && (
         <ul className="text-sm text-red-500">
           {errors.map((error) => (

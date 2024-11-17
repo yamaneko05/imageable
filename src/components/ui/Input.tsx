@@ -1,11 +1,9 @@
 import { input } from "@/variants/inputVariants";
 
-export default function Input({
-  attributes,
-  error = false,
-}: {
-  attributes?: React.ComponentProps<"input">;
+interface Props extends React.ComponentProps<"input"> {
   error?: boolean;
-}) {
+}
+
+export default function Input({ error = false, ...attributes }: Props) {
   return <input {...attributes} className={input({ error })} />;
 }

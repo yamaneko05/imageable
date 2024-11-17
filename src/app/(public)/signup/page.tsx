@@ -1,7 +1,7 @@
 "use client";
 
 import { signup } from "@/actions/auth";
-import { Alert, Button, FormField } from "@/components/ui";
+import { Alert, Button, FormField, Input } from "@/components/ui";
 import Link from "next/link";
 import { useActionState } from "react";
 
@@ -21,36 +21,50 @@ export default function SignUpPage() {
           <FormField
             id="email"
             label="メールアドレス"
-            name="email"
-            defaultValue={state?.old?.email}
             errors={state?.validationError?.email}
-          />
+          >
+            <Input
+              type="email"
+              name="email"
+              id="email"
+              defaultValue={state?.old?.email}
+              error={state?.validationError?.email !== undefined}
+            />
+          </FormField>
         </div>
         <div className="mb-6">
           <FormField
             id="password"
             label="パスワード"
-            type="password"
-            name="password"
-            defaultValue={state?.old?.password}
             errors={state?.validationError?.password}
-          />
+          >
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              defaultValue={state?.old?.password}
+              error={state?.validationError?.password !== undefined}
+            />
+          </FormField>
         </div>
         <div className="mb-8">
           <FormField
             id="password_confirm"
             label="パスワード（再入力）"
-            type="password"
-            name="password_confirm"
-            defaultValue={state?.old?.password_confirm}
             errors={state?.validationError?.password_confirm}
-          />
+          >
+            <Input
+              type="password"
+              name="password_confirm"
+              id="password_confirm"
+              defaultValue={state?.old?.password_confirm}
+              error={state?.validationError?.password_confirm !== undefined}
+            />
+          </FormField>
         </div>
         <Button
-          attributes={{
-            type: "submit",
-            disabled: isPending,
-          }}
+          type="submit"
+          disabled={isPending}
           variants={{ color: "success", WidthFull: true }}
           isPending={isPending}
         >

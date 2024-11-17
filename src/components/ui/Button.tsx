@@ -2,17 +2,18 @@ import { button } from "@/variants/buttonVariants";
 import { LucideLoader2 } from "lucide-react";
 import { VariantProps } from "tailwind-variants";
 
-export default function Button({
-  children,
-  attributes,
-  variants,
-  isPending = false,
-}: {
+interface Props extends React.ComponentProps<"button"> {
   children: React.ReactNode;
-  attributes?: React.ComponentProps<"button">;
   variants?: VariantProps<typeof button>;
   isPending?: boolean;
-}) {
+}
+
+export default function Button({
+  children,
+  variants,
+  isPending = false,
+  ...attributes
+}: Props) {
   return (
     <button className={button(variants)} {...attributes}>
       {children}

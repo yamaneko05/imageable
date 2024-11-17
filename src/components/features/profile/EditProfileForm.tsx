@@ -11,16 +11,14 @@ export default function EditProfileForm({ profile }: { profile: Profile }) {
   return (
     <>
       {state?.success && <Alert>保存しました</Alert>}
-      <form>
+      <form action={dispatch}>
         <div className="mb-6">
           <FormLabel attributes={{ htmlFor: "name" }}>ユーザー名</FormLabel>
           <Input
-            attributes={{
-              type: "text",
-              name: "name",
-              id: "name",
-              defaultValue: profile.name,
-            }}
+            type="text"
+            name="name"
+            id="name"
+            defaultValue={profile.name}
           />
         </div>
         <div className="mb-8">
@@ -37,11 +35,8 @@ export default function EditProfileForm({ profile }: { profile: Profile }) {
           />
         </div>
         <Button
-          attributes={{
-            type: "submit",
-            formAction: dispatch,
-            disabled: isPending,
-          }}
+          type="submit"
+          disabled={isPending}
           variants={{ WidthFull: true }}
         >
           保存

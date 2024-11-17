@@ -42,11 +42,8 @@ export default function Sidebar() {
           </Link>
         ))}
       </div>
-      <form>
-        <Button
-          attributes={{ formAction: signout }}
-          variants={{ size: "sm", color: "secondary" }}
-        >
+      <form action={signout}>
+        <Button variants={{ size: "sm", color: "secondary" }}>
           ログアウト
         </Button>
       </form>

@@ -9,7 +9,7 @@ export default function CreatePostForm() {
 
   return (
     <>
-      <form>
+      <form action={dispatch}>
         <div className="mb-8">
           <Textarea
             attributes={{
@@ -21,11 +21,8 @@ export default function CreatePostForm() {
           />
         </div>
         <Button
-          attributes={{
-            type: "submit",
-            formAction: dispatch,
-            disabled: isPending,
-          }}
+          type="submit"
+          disabled={isPending}
           variants={{ WidthFull: true, color: "success" }}
         >
           投稿
