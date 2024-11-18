@@ -2,12 +2,16 @@
 
 import { signin } from "@/actions/auth";
 import { Alert, Button, Input, FormField } from "@/components/ui";
+import ToggleShowPasswordButton from "@/components/ui/ToggleShowPasswordButton";
 import Link from "next/link";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 export default function LoginPage() {
   const [state, dispatch, isPending] = useActionState(signin, undefined);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => setShowPassword((prev) => !prev);
 
   return (
     <div className="w-96 px-3">
@@ -39,13 +43,19 @@ export default function LoginPage() {
             label="パスワード"
             errors={state?.validationError?.password}
           >
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              defaultValue={state?.old?.password}
-              error={state?.validationError?.password !== undefined}
-            />
+            <div className="relative">
+              <Input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                id="password"
+                defaultValue={state?.old?.password}
+                error={state?.validationError?.password !== undefined}
+              />
+              <ToggleShowPasswordButton
+                toggleShowPassword={toggleShowPassword}
+                showPassword={showPassword}
+              />
+            </div>
           </FormField>
         </div>
         <Button

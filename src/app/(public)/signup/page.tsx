@@ -2,11 +2,21 @@
 
 import { signup } from "@/actions/auth";
 import { Alert, Button, FormField, Input } from "@/components/ui";
+import ToggleShowPasswordButton from "@/components/ui/ToggleShowPasswordButton";
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 export default function SignUpPage() {
   const [state, dispatch, isPending] = useActionState(signup, undefined);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => setShowPassword((prev) => !prev);
+
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+
+  const toggleShowPasswordConfirm = () =>
+    setShowPasswordConfirm((prev) => !prev);
 
   return (
     <div className="w-96 px-3">
@@ -38,13 +48,19 @@ export default function SignUpPage() {
             label="パスワード"
             errors={state?.validationError?.password}
           >
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              defaultValue={state?.old?.password}
-              error={state?.validationError?.password !== undefined}
-            />
+            <div className="relative">
+              <Input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                id="password"
+                defaultValue={state?.old?.password}
+                error={state?.validationError?.password !== undefined}
+              />
+              <ToggleShowPasswordButton
+                toggleShowPassword={toggleShowPassword}
+                showPassword={showPassword}
+              />
+            </div>
           </FormField>
         </div>
         <div className="mb-8">
@@ -53,13 +69,19 @@ export default function SignUpPage() {
             label="パスワード（再入力）"
             errors={state?.validationError?.password_confirm}
           >
-            <Input
-              type="password"
-              name="password_confirm"
-              id="password_confirm"
-              defaultValue={state?.old?.password_confirm}
-              error={state?.validationError?.password_confirm !== undefined}
-            />
+            <div className="relative">
+              <Input
+                type={showPassword ? "text" : "password"}
+                name="password_confirm"
+                id="password_confirm"
+                defaultValue={state?.old?.password_confirm}
+                error={state?.validationError?.password_confirm !== undefined}
+              />
+              <ToggleShowPasswordButton
+                toggleShowPassword={toggleShowPasswordConfirm}
+                showPassword={showPasswordConfirm}
+              />
+            </div>
           </FormField>
         </div>
         <Button
