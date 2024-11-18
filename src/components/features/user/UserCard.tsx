@@ -1,14 +1,11 @@
 import { Avatar, Button, LinkButton } from "@/components/ui";
+import { authService } from "@/services/authService";
 import { profileService } from "@/services/profileService";
 import { UserForProfilePage } from "@/types";
 
-export default async function UserCard({
-  user,
-  loginUserId,
-}: {
-  user: UserForProfilePage;
-  loginUserId: string;
-}) {
+export default async function UserCard({ user }: { user: UserForProfilePage }) {
+  const loginUserAuthId = await authService.getLoginUserAuthId();
+
   return (
     <div className="mb-4">
       <div className="mb-2 flex items-center gap-8">
@@ -32,7 +29,7 @@ export default async function UserCard({
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            {user.id === loginUserId ? (
+            {user.authId === loginUserAuthId ? (
               <LinkButton
                 attributes={{ href: "/profile/edit" }}
                 variants={{ size: "sm", color: "secondary" }}

@@ -1,3 +1,5 @@
+import { PrismaClient } from "@prisma/client";
+import { authService } from "./authService";
 import { storageService } from "./storageService";
 
 export const profileService = {
@@ -7,5 +9,20 @@ export const profileService = {
       return publicUrl;
     }
     return "https://placehold.jp/96x96.png";
+  },
+  getLoginUserProfile: async () => {
+    const loginUserAuthId = await authService.getLoginUserAuthId();
+
+    const prisma = new PrismaClient();
+
+    const profile = await prisma.profile.findFirstOrThrow({
+      where: {
+        user: {
+          authId: loginUserAuthId,
+        },
+      },
+    });
+
+    return profile;
   },
 };

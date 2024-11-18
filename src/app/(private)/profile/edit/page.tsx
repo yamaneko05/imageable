@@ -1,20 +1,10 @@
 import EditProfileForm from "@/components/features/profile/EditProfileForm";
 import { PageHeading } from "@/components/ui";
-import { authService } from "@/services/authService";
-import { PrismaClient } from "@prisma/client";
 import { profileService } from "@/services/profileService";
-import UploadImageForm from "@/components/features/profile/UploadImageButton";
+import UploadImageForm from "@/components/features/profile/UploadImageForm";
 
 export default async function ProfilePage() {
-  const loginUserId = await authService.getLoginUserId();
-
-  const prisma = new PrismaClient();
-
-  const profile = await prisma.profile.findUnique({
-    where: {
-      userId: loginUserId,
-    },
-  });
+  const profile = await profileService.getLoginUserProfile();
 
   return (
     <>

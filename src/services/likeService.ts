@@ -1,7 +1,10 @@
 import { PrismaClient } from "@prisma/client";
+import { authService } from "./authService";
 
 export const likeService = {
-  getLikedPostIdsByUserId: async (userId: string) => {
+  getLikedPostIdsByLoginUser: async () => {
+    const loginUserAuthId = await authService.getLoginUserAuthId();
+
     const prisma = new PrismaClient();
 
     const likedByUserPosts = await prisma.like.findMany({
@@ -9,7 +12,9 @@ export const likeService = {
         postId: true,
       },
       where: {
-        userId: userId,
+        user: {
+          authId: loginUserAuthId,
+        },
       },
     });
 

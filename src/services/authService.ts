@@ -19,4 +19,15 @@ export const authService = {
 
     return id;
   },
+  getLoginUserAuthId: async () => {
+    const supabase = await createClient();
+
+    const { data } = await supabase.auth.getUser();
+
+    if (data.user === null) {
+      throw new Error("認証されていません");
+    }
+
+    return data.user!.id;
+  },
 };

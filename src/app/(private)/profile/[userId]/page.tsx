@@ -1,6 +1,5 @@
 import PostCard from "@/components/features/post/PostCard";
 import UserCard from "@/components/features/user/UserCard";
-import { authService } from "@/services/authService";
 import { likeService } from "@/services/likeService";
 import { userService } from "@/services/userService";
 
@@ -11,16 +10,14 @@ export default async function ProfilePage({
 }) {
   const { userId } = await params;
 
-  const loginUserId = await authService.getLoginUserId();
-
   const user = await userService.getUserForProfilePage(userId);
 
   const likedByLoginUserPostIds =
-    await likeService.getLikedPostIdsByUserId(loginUserId);
+    await likeService.getLikedPostIdsByLoginUser();
 
   return (
     <>
-      <UserCard user={user} loginUserId={loginUserId} />
+      <UserCard user={user} />
       <div className="">
         {user.posts.map((post) => (
           <PostCard
