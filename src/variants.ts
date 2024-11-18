@@ -23,3 +23,30 @@ export const button = tv({
     WidthFull: false,
   },
 });
+
+export const input = tv({
+  base: "block w-full rounded border px-3 py-2 focus:outline-blue-300",
+  variants: {
+    error: {
+      true: "border-red-500",
+    },
+  },
+});
+
+export const stepperIcon = tv({
+  base: "mb-1 grid h-10 w-10 place-items-center rounded-full bg-slate-100",
+  variants: {
+    doing: {
+      true: "bg-indigo-500 text-white",
+    },
+  },
+});
+
+export const stepperText = tv({
+  base: "font-bold",
+  variants: {
+    doing: {
+      true: "text-indigo-500",
+    },
+  },
+});

@@ -1,4 +1,4 @@
-import { button } from "@/variants/buttonVariants";
+import { button } from "@/variants";
 import { LucideLoader2 } from "lucide-react";
 import { VariantProps } from "tailwind-variants";
 

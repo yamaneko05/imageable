@@ -1,4 +1,4 @@
-import { input } from "@/variants/inputVariants";
+import { input } from "@/variants";
 
 interface Props extends React.ComponentProps<"input"> {
   error?: boolean;

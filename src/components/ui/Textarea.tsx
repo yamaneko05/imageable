@@ -1,4 +1,4 @@
-import { input } from "@/variants/inputVariants";
+import { input } from "@/variants";
 import { tv } from "tailwind-variants";
 
 const textarea = tv({

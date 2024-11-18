@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 export default {
   content: [
-    "./src/variants/**/*.ts",
+    "./src/variants.ts",
     "./src/components/**/*.tsx",
     "./src/app/**/*.tsx",
   ],

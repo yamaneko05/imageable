@@ -1,4 +1,4 @@
-import { button } from "@/variants/buttonVariants";
+import { button } from "@/variants";
 import { VariantProps } from "tailwind-variants";
 
 export default function InputButton({

@@ -1,4 +1,4 @@
-import { button } from "@/variants/buttonVariants";
+import { button } from "@/variants";
 import Link, { LinkProps } from "next/link";
 import { tv, VariantProps } from "tailwind-variants";
 

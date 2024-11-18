@@ -13,7 +13,11 @@ export default function ToggleShowPasswordButton({
       onClick={toggleShowPassword}
       className="absolute end-4 top-1/2 -translate-y-1/2 text-sm underline"
     >
-      {showPassword ? <LucideEye /> : <LucideEyeOff />}
+      {showPassword ? (
+        <LucideEye className="text-slate-500" />
+      ) : (
+        <LucideEyeOff className="text-slate-500" />
+      )}
     </button>
   );
 }

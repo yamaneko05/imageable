@@ -1,6 +1,7 @@
 "use client";
 
 import { signup } from "@/actions/auth";
+import SignUpStepper from "@/components/features/auth/SignUpStepper";
 import { Alert, Button, FormField, Input } from "@/components/ui";
 import ToggleShowPasswordButton from "@/components/ui/ToggleShowPasswordButton";
 import Link from "next/link";
@@ -26,6 +27,7 @@ export default function SignUpPage() {
           {state.serverError.message}
         </Alert>
       )}
+      <SignUpStepper doing={0} />
       <form className="mb-6" action={dispatch}>
         <div className="mb-6">
           <FormField
