@@ -3,6 +3,7 @@ import { profileService } from "@/services/profileService";
 import { PostWithRelations } from "@/types";
 import dayjs from "@/utils/dayjs";
 import PostCardActivities from "./PostCardActivities";
+import Link from "next/link";
 
 export default async function PostCard({
   post,
@@ -14,10 +15,12 @@ export default async function PostCard({
   return (
     <div key={post.id} className="flex gap-3 py-4">
       <div className="pt-2">
-        <Avatar
-          src={await profileService.getImageUrl(post.user.profile!.image)}
-          size={42}
-        />
+        <Link href={`/profile/${post.user.id}`}>
+          <Avatar
+            src={await profileService.getImageUrl(post.user.profile!.image)}
+            size={42}
+          />
+        </Link>
       </div>
       <div className="flex-1">
         <div className="flex items-center gap-2">

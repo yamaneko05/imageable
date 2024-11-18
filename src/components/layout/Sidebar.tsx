@@ -21,12 +21,12 @@ export default async function Sidebar() {
           />
         </Link>
       </div>
-      <div className="mb-8 space-y-2">
+      <div className="mb-8 space-y-1">
         {navItems.map((item) => (
           <Link
             key={navItems.indexOf(item)}
             href={item.path}
-            className="block rounded-lg px-2 py-4 hover:bg-slate-50"
+            className="block rounded-lg p-3 hover:bg-slate-50"
           >
             {item.lucide}
             {item.name}

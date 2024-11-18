@@ -1,7 +1,7 @@
 "use client";
 
 import { attach, detach } from "@/actions/like";
-import { PostWithRelation } from "@/types/post";
+import { PostWithRelations } from "@/types";
 import { LucideHeart, LucideMessageCircle } from "lucide-react";
 import { useState } from "react";
 
@@ -9,7 +9,7 @@ export default function PostCardActivities({
   post,
   likedByLoginUser,
 }: {
-  post: PostWithRelation;
+  post: PostWithRelations;
   likedByLoginUser: boolean;
 }) {
   const [liked, setLiked] = useState(likedByLoginUser);
