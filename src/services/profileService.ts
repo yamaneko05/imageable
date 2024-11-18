@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-import { authService } from "./authService";
 import { storageService } from "./storageService";
 
 export const profileService = {
@@ -10,15 +9,13 @@ export const profileService = {
     }
     return "/user-round.png";
   },
-  getLoginUserProfile: async () => {
-    const loginUserAuthId = await authService.getLoginUserAuthId();
-
+  getProfileByUserId: async (userId: string) => {
     const prisma = new PrismaClient();
 
     const profile = await prisma.profile.findFirstOrThrow({
       where: {
         user: {
-          authId: loginUserAuthId,
+          id: userId,
         },
       },
     });

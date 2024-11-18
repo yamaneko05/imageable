@@ -5,12 +5,14 @@ import { PrismaClient } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { storageService } from "@/services/storageService";
 import { redirect } from "next/navigation";
+import { userService } from "@/services/userService";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function update(_prevState: any, formData: FormData) {
   const prisma = new PrismaClient();
 
-  const loginUserId = await authService.getLoginUserId();
+  const loginUserAuthId = await authService.getLoginUserAuthId();
+  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
 
   const data = {
     name: formData.get("name") as string,
@@ -19,7 +21,7 @@ export async function update(_prevState: any, formData: FormData) {
 
   await prisma.profile.update({
     where: {
-      userId: loginUserId,
+      userId: loginUser.id,
     },
     data: data,
   });
@@ -32,13 +34,14 @@ export async function update(_prevState: any, formData: FormData) {
 export async function uploadImage(image: File) {
   const { path } = await storageService.uploadImage(image);
 
-  const loginUserId = await authService.getLoginUserId();
+  const loginUserAuthId = await authService.getLoginUserAuthId();
+  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
 
   const prisma = new PrismaClient();
 
   await prisma.profile.update({
     where: {
-      userId: loginUserId,
+      userId: loginUser.id,
     },
     data: {
       image: path,
@@ -53,7 +56,8 @@ export async function uploadImage(image: File) {
 export async function create(_prevState: any, formData: FormData) {
   const prisma = new PrismaClient();
 
-  const loginUserId = await authService.getLoginUserId();
+  const loginUserAuthId = await authService.getLoginUserAuthId();
+  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
 
   const data = {
     name: formData.get("name") as string,
@@ -62,7 +66,7 @@ export async function create(_prevState: any, formData: FormData) {
 
   await prisma.profile.create({
     data: {
-      userId: loginUserId,
+      userId: loginUser.id,
       ...data,
     },
   });

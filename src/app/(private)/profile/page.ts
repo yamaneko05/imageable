@@ -1,8 +1,10 @@
 import { authService } from "@/services/authService";
+import { userService } from "@/services/userService";
 import { redirect } from "next/navigation";
 
 export default async function Page() {
-  const loginUserId = await authService.getLoginUserId();
+  const loginUserAuthId = await authService.getLoginUserAuthId();
+  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
 
-  redirect(`/profile/${loginUserId}`);
+  redirect(`/profile/${loginUser.id}`);
 }

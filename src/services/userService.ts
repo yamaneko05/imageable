@@ -1,8 +1,18 @@
 import { validators } from "@/validators";
 import { PrismaClient } from "@prisma/client";
-import { authService } from "./authService";
 
 export const userService = {
+  getUserByAuthId: async function (authId: string) {
+    const prisma = new PrismaClient();
+
+    const user = await prisma.user.findUniqueOrThrow({
+      where: {
+        authId,
+      },
+    });
+
+    return user;
+  },
   getUserForProfilePage: async (userId: string) => {
     const prisma = new PrismaClient();
 
@@ -48,17 +58,18 @@ export const userService = {
 
     return followedBy;
   },
-  isFollowedByLoginUser: async (userId: string) => {
-    const loginUserId = await authService.getLoginUserId();
-
+  firstIsFollowedBySecond: async (
+    firstUserId: string,
+    secondUserId: string,
+  ) => {
     const prisma = new PrismaClient();
 
     const tmp = await prisma.user.findUnique({
       where: {
-        id: loginUserId,
-        following: {
+        id: firstUserId,
+        followedBy: {
           some: {
-            id: userId,
+            id: secondUserId,
           },
         },
       },

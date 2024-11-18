@@ -1,10 +1,15 @@
 import SignUpStepper from "@/components/features/auth/SignUpStepper";
 import UploadImageForm from "@/components/features/profile/UploadImageForm";
 import { LinkButton } from "@/components/ui";
+import { authService } from "@/services/authService";
 import { profileService } from "@/services/profileService";
+import { userService } from "@/services/userService";
 
 export default async function EditProfileImagePage() {
-  const profile = await profileService.getLoginUserProfile();
+  const loginUserAuthId = await authService.getLoginUserAuthId();
+  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
+
+  const profile = await profileService.getProfileByUserId(loginUser.id);
 
   return (
     <div className="px-3">

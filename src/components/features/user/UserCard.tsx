@@ -7,7 +7,12 @@ import { userService } from "@/services/userService";
 
 export default async function UserCard({ user }: { user: UserForProfilePage }) {
   const loginUserAuthId = await authService.getLoginUserAuthId();
-  const followedByLoginUser = await userService.isFollowedByLoginUser(user.id);
+  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
+
+  const followedByLoginUser = await userService.firstIsFollowedBySecond(
+    user.id,
+    loginUser.id,
+  );
 
   return (
     <div className="mb-4">

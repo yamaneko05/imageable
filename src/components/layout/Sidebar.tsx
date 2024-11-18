@@ -1,13 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import Button from "../ui/Button";
 import { signout } from "@/actions/auth";
 import { profileService } from "@/services/profileService";
-import { Avatar } from "../ui";
+import { Avatar, Button } from "@/components/ui";
 import { navItems } from "@/constants";
+import { authService } from "@/services/authService";
+import { userService } from "@/services/userService";
 
 export default async function Sidebar() {
-  const profile = await profileService.getLoginUserProfile();
+  const loginUserAuthId = await authService.getLoginUserAuthId();
+  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
+  const profile = await profileService.getProfileByUserId(loginUser.id);
 
   return (
     <div className="fixed bottom-0 top-0 w-64 border-e p-3">
