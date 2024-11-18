@@ -68,6 +68,4 @@ export async function create(_prevState: any, formData: FormData) {
   });
 
   redirect("/signup/edit-profile-image");
-
-  return { success: true };
 }

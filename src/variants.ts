@@ -50,3 +50,12 @@ export const stepperText = tv({
     },
   },
 });
+
+export const avatarImage = tv({
+  base: "rounded-full",
+  variants: {
+    border: {
+      true: "border border-black",
+    },
+  },
+});

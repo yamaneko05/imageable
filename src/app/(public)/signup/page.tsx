@@ -14,11 +14,6 @@ export default function SignUpPage() {
 
   const toggleShowPassword = () => setShowPassword((prev) => !prev);
 
-  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
-
-  const toggleShowPasswordConfirm = () =>
-    setShowPasswordConfirm((prev) => !prev);
-
   return (
     <div className="w-96 px-3">
       <div className="mb-8 text-center text-2xl font-bold">新規登録</div>
@@ -80,8 +75,8 @@ export default function SignUpPage() {
                 error={state?.validationError?.password_confirm !== undefined}
               />
               <ToggleShowPasswordButton
-                toggleShowPassword={toggleShowPasswordConfirm}
-                showPassword={showPasswordConfirm}
+                toggleShowPassword={toggleShowPassword}
+                showPassword={showPassword}
               />
             </div>
           </FormField>

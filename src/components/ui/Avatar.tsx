@@ -1,11 +1,21 @@
+import { avatarImage } from "@/variants";
 import Image from "next/image";
+import { VariantProps } from "tailwind-variants";
 
-export default function Avatar({ src, size }: { src: string; size: number }) {
+export default function Avatar({
+  src,
+  size,
+  variants,
+}: {
+  src: string;
+  size: number;
+  variants?: VariantProps<typeof avatarImage>;
+}) {
   return (
     <Image
       src={src}
       alt=""
-      className="rounded-full"
+      className={avatarImage(variants)}
       width={size}
       height={size}
     />

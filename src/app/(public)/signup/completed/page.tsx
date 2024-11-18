@@ -12,10 +12,7 @@ export default function CompletedPage() {
         <br />
         投稿にいいね、コメントしてみましょう。
       </div>
-      <LinkButton
-        attributes={{ href: "/timeline" }}
-        variants={{ WidthFull: true }}
-      >
+      <LinkButton href="/timeline" variants={{ WidthFull: true }}>
         タイムラインへ
       </LinkButton>
     </div>

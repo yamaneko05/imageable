@@ -7,15 +7,16 @@ const linkButton = tv({
   base: "inline-block text-center",
 });
 
+interface Props extends LinkProps {
+  children: React.ReactNode;
+  variants?: VariantProps<typeof linkButton>;
+}
+
 export default function LinkButton({
   children,
-  attributes,
   variants,
-}: {
-  children: React.ReactNode;
-  attributes: LinkProps;
-  variants?: VariantProps<typeof linkButton>;
-}) {
+  ...attributes
+}: Props) {
   return (
     <Link className={linkButton(variants)} {...attributes}>
       {children}

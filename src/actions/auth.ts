@@ -2,11 +2,13 @@
 
 import { signinSchema, signupSchema } from "@/schema";
 import { createClient } from "@/utils/supabase/server";
+import { PrismaClient } from "@prisma/client";
 import { redirect } from "next/navigation";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function signup(_prevState: any, formData: FormData) {
   const supabase = await createClient();
+  const prisma = new PrismaClient();
 
   const old = {
     email: formData.get("email") as string,
@@ -17,10 +19,16 @@ export async function signup(_prevState: any, formData: FormData) {
   const validationResult = signupSchema.safeParse(old);
 
   if (validationResult.success) {
-    const { error } = await supabase.auth.signUp(validationResult.data);
+    const { error, data } = await supabase.auth.signUp(validationResult.data);
     if (error) {
       return { serverError: error };
     }
+
+    await prisma.user.create({
+      data: {
+        authId: data.user!.id,
+      },
+    });
   } else {
     return {
       validationError: validationResult.error.flatten().fieldErrors,
@@ -28,7 +36,8 @@ export async function signup(_prevState: any, formData: FormData) {
     };
   }
 
-  redirect("/signup/confirm-your-email");
+  redirect(`/signup/confirm-your-email?email=${old.email}`);
+  // redirect("/signup/create-profile");
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

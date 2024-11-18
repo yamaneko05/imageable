@@ -31,7 +31,7 @@ export default async function UserCard({ user }: { user: UserForProfilePage }) {
           <div className="grid grid-cols-2 gap-4">
             {user.authId === loginUserAuthId ? (
               <LinkButton
-                attributes={{ href: "/profile/edit" }}
+                href="/profile/edit"
                 variants={{ size: "sm", color: "secondary" }}
               >
                 プロフィールを編集

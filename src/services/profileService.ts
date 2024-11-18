@@ -8,7 +8,7 @@ export const profileService = {
       const publicUrl = await storageService.getPublicUrl(image);
       return publicUrl;
     }
-    return "https://placehold.jp/96x96.png";
+    return "/user-round.png";
   },
   getLoginUserProfile: async () => {
     const loginUserAuthId = await authService.getLoginUserAuthId();
