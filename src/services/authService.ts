@@ -1,16 +1,16 @@
 import { createClient } from "@/utils/supabase/server";
 import { PrismaClient } from "@prisma/client";
+import { redirect } from "next/navigation";
 
 export const authService = {
-  getLoginUserId: async () => {
-    const supabase = await createClient();
+  getLoginUserId: async function () {
     const prisma = new PrismaClient();
 
-    const { data } = await supabase.auth.getUser();
+    const loginUserAuthId = await this.getLoginUserAuthId();
 
     const { id } = await prisma.user.findUniqueOrThrow({
       where: {
-        authId: data.user?.id,
+        authId: loginUserAuthId,
       },
       select: {
         id: true,
@@ -24,10 +24,10 @@ export const authService = {
 
     const { data } = await supabase.auth.getUser();
 
-    if (data.user === null) {
-      throw new Error("認証されていません");
+    if (data.user) {
+      return data.user.id;
     }
 
-    return data.user!.id;
+    redirect("/error");
   },
 };
