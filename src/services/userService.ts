@@ -22,41 +22,19 @@ export const userService = {
 
     return user;
   },
-  getFollowing: async (authId: string) => {
+  getUserFollowed: async (userId: string) => {
     const prisma = new PrismaClient();
 
-    const { following } = await prisma.user.findUniqueOrThrow({
-      where: {
-        authId: authId,
-      },
-      include: {
-        following: {
-          include: {
-            profile: true,
-          },
-        },
-      },
-    });
+    const users = await prisma.user.findMany(validators.userFollowed(userId));
 
-    return following;
+    return users;
   },
-  getFollowedBy: async (authId: string) => {
+  getUserFollowing: async (userId: string) => {
     const prisma = new PrismaClient();
 
-    const { followedBy } = await prisma.user.findUniqueOrThrow({
-      where: {
-        authId: authId,
-      },
-      include: {
-        followedBy: {
-          include: {
-            profile: true,
-          },
-        },
-      },
-    });
+    const users = await prisma.user.findMany(validators.userFollowing(userId));
 
-    return followedBy;
+    return users;
   },
   firstIsFollowedBySecond: async (
     firstUserId: string,

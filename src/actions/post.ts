@@ -1,6 +1,7 @@
 "use server";
 
 import { authService } from "@/services/authService";
+import { userService } from "@/services/userService";
 import { PrismaClient } from "@prisma/client";
 import { redirect } from "next/navigation";
 
@@ -10,16 +11,17 @@ export async function createPostAction(_prevState: any, formData: FormData) {
     description: formData.get("description") as string,
   };
 
-  const loginUserId = await authService.getLoginUserId();
+  const loginUserAuthId = await authService.getLoginUserAuthId();
+  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
 
   const prisma = new PrismaClient();
 
   await prisma.post.create({
     data: {
-      userId: loginUserId,
+      userId: loginUser.id,
       ...data,
     },
   });
 
-  redirect(`/profile/${loginUserId}`);
+  redirect(`/profile/${loginUser.id}`);
 }

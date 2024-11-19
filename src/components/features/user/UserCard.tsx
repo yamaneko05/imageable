@@ -19,7 +19,7 @@ export default async function UserCard({ user }: { user: UserForProfilePage }) {
       <div className="mb-2 flex items-center gap-8">
         <Avatar
           src={await profileService.getImageUrl(user.profile!.image)}
-          size={96}
+          size={144}
         />
         <UserCardActivities
           user={user}
@@ -27,7 +27,7 @@ export default async function UserCard({ user }: { user: UserForProfilePage }) {
           followedByLoginUser={followedByLoginUser}
         />
       </div>
-      <div className="mb-2 font-bold">{user.profile?.name}</div>
+      <div className="text-lg font-bold">{user.profile?.name}</div>
       <div className="text-sm">{user.profile?.description}</div>
     </div>
   );

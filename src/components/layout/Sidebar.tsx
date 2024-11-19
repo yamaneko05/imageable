@@ -13,13 +13,13 @@ export default async function Sidebar() {
   const profile = await profileService.getProfileByUserId(loginUser.id);
 
   return (
-    <div className="fixed bottom-0 top-0 w-64 border-e p-3">
+    <div className="fixed bottom-0 top-0 w-56 border-e p-3">
       <div className="mb-8">
         <Link href="/">
           <Image
-            src="https://placehold.jp/220x40.png"
+            src="https://placehold.jp/200x40.png"
             alt=""
-            width={220}
+            width={200}
             height={40}
           />
         </Link>

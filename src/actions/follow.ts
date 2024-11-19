@@ -1,16 +1,18 @@
 "use server";
 
 import { authService } from "@/services/authService";
+import { userService } from "@/services/userService";
 import { PrismaClient } from "@prisma/client";
 
 export async function attach(userId: string) {
-  const loginUserId = await authService.getLoginUserId();
+  const loginUserAuthId = await authService.getLoginUserAuthId();
+  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
 
   const prisma = new PrismaClient();
 
   await prisma.user.update({
     where: {
-      id: loginUserId,
+      id: loginUser.id,
     },
     data: {
       following: {
@@ -21,13 +23,14 @@ export async function attach(userId: string) {
 }
 
 export async function detach(userId: string) {
-  const loginUserId = await authService.getLoginUserId();
+  const loginUserAuthId = await authService.getLoginUserAuthId();
+  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
 
   const prisma = new PrismaClient();
 
   await prisma.user.update({
     where: {
-      id: loginUserId,
+      id: loginUser.id,
     },
     data: {
       following: {

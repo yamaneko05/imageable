@@ -10,7 +10,7 @@ export const likeService = {
       },
       where: {
         user: {
-          authId: userId,
+          id: userId,
         },
       },
     });

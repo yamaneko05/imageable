@@ -47,4 +47,34 @@ export const validators = {
     );
     return validator;
   },
+  userFollowed: (userId: string) => {
+    const validator = Prisma.validator<Prisma.UserFindManyArgs>()({
+      where: {
+        following: {
+          some: {
+            id: userId,
+          },
+        },
+      },
+      include: {
+        profile: true,
+      },
+    });
+    return validator;
+  },
+  userFollowing: (userId: string) => {
+    const validator = Prisma.validator<Prisma.UserFindManyArgs>()({
+      where: {
+        followedBy: {
+          some: {
+            id: userId,
+          },
+        },
+      },
+      include: {
+        profile: true,
+      },
+    });
+    return validator;
+  },
 };
