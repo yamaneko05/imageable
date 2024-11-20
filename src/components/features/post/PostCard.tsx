@@ -16,10 +16,11 @@ export default async function PostCard({
     <div key={post.id} className="flex gap-3 py-4">
       <div className="pt-2">
         <Link href={`/profile/${post.user.id}`}>
-          <Avatar
-            src={await profileService.getImageUrl(post.user.profile!.image)}
-            size={42}
-          />
+          <div className="h-12 w-12">
+            <Avatar
+              src={await profileService.getImageUrl(post.user.profile!.image)}
+            />
+          </div>
         </Link>
       </div>
       <div className="flex-1">

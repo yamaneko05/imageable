@@ -4,20 +4,18 @@ import { VariantProps } from "tailwind-variants";
 
 export default function Avatar({
   src,
-  size,
   variants,
 }: {
   src: string;
-  size: number;
   variants?: VariantProps<typeof avatarImage>;
 }) {
   return (
     <Image
       src={src}
       alt=""
+      width={240}
+      height={240}
       className={avatarImage(variants)}
-      width={size}
-      height={size}
     />
   );
 }

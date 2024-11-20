@@ -4,16 +4,17 @@ import { signout } from "@/actions/auth";
 import { profileService } from "@/services/profileService";
 import { Avatar, Button } from "@/components/ui";
 import { navItems } from "@/constants";
-import { authService } from "@/services/authService";
-import { userService } from "@/services/userService";
+import { Profile, User } from "@prisma/client";
 
-export default async function Sidebar() {
-  const loginUserAuthId = await authService.getLoginUserAuthId();
-  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
-  const profile = await profileService.getProfileByUserId(loginUser.id);
-
+export default async function Sidebar({
+  loginUser,
+  profile,
+}: {
+  loginUser: User;
+  profile: Profile;
+}) {
   return (
-    <div className="fixed bottom-0 top-0 w-56 border-e px-3 py-6">
+    <div className="fixed bottom-0 top-0 hidden w-56 border-e px-3 py-6 sm:block">
       <div className="mb-8">
         <Link href="/">
           <Image src="/logo.png" alt="" width={180} height={36} />
@@ -31,13 +32,15 @@ export default async function Sidebar() {
           </Link>
         ))}
       </div>
-      <div className="mb-6 flex items-center gap-3">
-        <Avatar
-          src={await profileService.getImageUrl(profile.image)}
-          size={36}
-        />
+      <Link
+        href={`/profile/${loginUser.id}`}
+        className="mb-6 flex items-center gap-3 rounded-lg bg-slate-50 p-2"
+      >
+        <div className="h-10 w-10">
+          <Avatar src={await profileService.getImageUrl(profile.image)} />
+        </div>
         <div className="font-bold">{profile.name}</div>
-      </div>
+      </Link>
       <form action={signout}>
         <Button variants={{ size: "sm", color: "secondary" }}>
           ログアウト

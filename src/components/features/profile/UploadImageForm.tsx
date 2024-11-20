@@ -12,7 +12,9 @@ export default function UploadImageForm({ imageUrl }: { imageUrl: string }) {
     <div className="mb-6 rounded-xl bg-zinc-200 p-3">
       {state?.success && <Alert>保存しました</Alert>}
       <div className="flex items-center justify-between">
-        <Avatar src={imageUrl} size={96} variants={{ border: true }} />
+        <div className="h-24 w-24">
+          <Avatar src={imageUrl} variants={{ border: true }} />
+        </div>
         <InputButton
           variants={{ size: "sm" }}
           attributes={{

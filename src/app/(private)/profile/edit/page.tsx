@@ -13,7 +13,7 @@ export default async function ProfilePage() {
   return (
     <>
       <PageHeading>プロフィールを編集</PageHeading>
-      <div className="w-96">
+      <div className="max-w-96">
         <UploadImageForm
           imageUrl={await profileService.getImageUrl(profile!.image)}
         />
