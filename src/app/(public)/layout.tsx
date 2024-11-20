@@ -8,12 +8,14 @@ export default function PublicLayout({
 }) {
   return (
     <>
-      <div className="mx-auto flex h-24 max-w-[768px] items-center">
-        <Link href="/">
-          <Image src="/logo.png" alt="" width={180} height={36} />
-        </Link>
+      <div className="fixed left-0 right-0 top-0">
+        <div className="mx-auto flex h-24 max-w-[768px] items-center px-3">
+          <Link href="/">
+            <Image src="/logo.png" alt="" width={180} height={36} />
+          </Link>
+        </div>
       </div>
-      <div className="flex h-[calc(100vh-6rem)] w-screen items-center justify-center">
+      <div className="flex h-dvh w-screen items-center justify-center">
         {children}
       </div>
     </>

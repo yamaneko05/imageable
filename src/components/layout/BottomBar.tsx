@@ -3,7 +3,7 @@ import { navItems } from "@/constants";
 
 export default async function Bottombar() {
   return (
-    <div className="fixed bottom-0 flex w-full items-center justify-center gap-4 border-t bg-white py-1 sm:hidden">
+    <div className="fixed bottom-0 flex h-14 w-full items-center justify-center gap-4 border-t bg-white sm:hidden">
       {navItems.map((item) => (
         <Link
           key={navItems.indexOf(item)}
