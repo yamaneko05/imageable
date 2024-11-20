@@ -1,11 +1,11 @@
 "use client";
 
-import { Button, FormLabel, Input, Textarea } from "@/components/ui";
+import { Button, FormField, FormLabel, Input, Textarea } from "@/components/ui";
 import { useActionState } from "react";
 import { create } from "@/actions/profile";
 
 export default function CreateProfileForm() {
-  const [_state, dispatch, isPending] = useActionState(create, undefined);
+  const [state, dispatch, isPending] = useActionState(create, undefined);
 
   return (
     <>
@@ -15,16 +15,20 @@ export default function CreateProfileForm() {
           <Input type="text" name="name" id="name" />
         </div>
         <div className="mb-8">
-          <FormLabel attributes={{ htmlFor: "description" }}>
-            プロフィール文
-          </FormLabel>
-          <Textarea
-            attributes={{
-              name: "description",
-              id: "description",
-              rows: 6,
-            }}
-          />
+          <FormField
+            id="description"
+            label="プロフィール文"
+            errors={state?.validationError?.description}
+          >
+            <Textarea
+              name="description"
+              id="description"
+              placeholder="いまどうしてる？"
+              rows={6}
+              defaultValue={state?.old?.description}
+              error={state?.validationError?.description !== undefined}
+            />
+          </FormField>
         </div>
         <Button
           type="submit"

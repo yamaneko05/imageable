@@ -1,33 +1,40 @@
 "use server";
 
 import { PrismaClient } from "@prisma/client";
-import { revalidatePath } from "next/cache";
 import { storageService } from "@/services/storageService";
 import { redirect } from "next/navigation";
 import { imageService } from "@/services/imageService";
 import { getLoginUserId } from "@/helpers";
+import { profileSchema } from "@/schema";
+import { revalidatePath } from "next/cache";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function update(_prevState: any, formData: FormData) {
-  const prisma = new PrismaClient();
-
-  const loginUserId = await getLoginUserId();
-
-  const data = {
+  const old = {
     name: formData.get("name") as string,
     description: formData.get("description") as string,
   };
 
-  await prisma.profile.update({
-    where: {
-      userId: loginUserId,
-    },
-    data: data,
-  });
+  const validationResult = profileSchema.safeParse(old);
 
-  revalidatePath("/profile/edit");
+  if (validationResult.success) {
+    const prisma = new PrismaClient();
+    const loginUserId = await getLoginUserId();
 
-  return { success: true };
+    await prisma.profile.update({
+      where: {
+        userId: loginUserId,
+      },
+      data: validationResult.data,
+    });
+
+    revalidatePath("/profile/edit");
+  } else {
+    return {
+      validationError: validationResult.error.flatten().fieldErrors,
+      old: old,
+    };
+  }
 }
 
 export async function uploadImage(image: File) {
@@ -56,21 +63,29 @@ export async function uploadImage(image: File) {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function create(_prevState: any, formData: FormData) {
-  const prisma = new PrismaClient();
-
-  const loginUserId = await getLoginUserId();
-
-  const data = {
+  const old = {
     name: formData.get("name") as string,
     description: formData.get("description") as string,
   };
 
-  await prisma.profile.create({
-    data: {
-      userId: loginUserId,
-      ...data,
-    },
-  });
+  const validationResult = profileSchema.safeParse(old);
 
-  redirect("/signup/edit-profile-image");
+  if (validationResult.success) {
+    const prisma = new PrismaClient();
+    const loginUserId = await getLoginUserId();
+
+    await prisma.profile.create({
+      data: {
+        userId: loginUserId,
+        ...validationResult.data,
+      },
+    });
+
+    redirect("/signup/edit-profile-image");
+  } else {
+    return {
+      validationError: validationResult.error.flatten().fieldErrors,
+      old: old,
+    };
+  }
 }

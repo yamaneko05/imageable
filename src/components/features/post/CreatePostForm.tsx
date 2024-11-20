@@ -1,24 +1,30 @@
 "use client";
 
 import { createPostAction } from "@/actions/post";
-import { Button, Textarea } from "@/components/ui";
+import { Button, FormField, Textarea } from "@/components/ui";
 import { useActionState } from "react";
 
 export default function CreatePostForm() {
-  const [_, dispatch, isPending] = useActionState(createPostAction, null);
+  const [state, dispatch, isPending] = useActionState(createPostAction, null);
 
   return (
     <>
       <form action={dispatch}>
         <div className="mb-8">
-          <Textarea
-            attributes={{
-              name: "description",
-              id: "description",
-              placeholder: "いまどうしてる？",
-              rows: 6,
-            }}
-          />
+          <FormField
+            id="description"
+            label="本文"
+            errors={state?.validationError?.description}
+          >
+            <Textarea
+              name="description"
+              id="description"
+              placeholder="いまどうしてる？"
+              rows={6}
+              defaultValue={state?.old?.description}
+              error={state?.validationError?.description !== undefined}
+            />
+          </FormField>
         </div>
         <Button
           type="submit"

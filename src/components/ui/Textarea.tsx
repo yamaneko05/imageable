@@ -5,10 +5,10 @@ const textarea = tv({
   extend: input,
 });
 
-export default function Input({
-  attributes,
-}: {
-  attributes?: React.ComponentProps<"textarea">;
-}) {
-  return <textarea {...attributes} className={textarea()} />;
+interface Props extends React.ComponentProps<"textarea"> {
+  error?: boolean;
+}
+
+export default function Textarea({ error = false, ...attributes }: Props) {
+  return <textarea {...attributes} className={textarea({ error })} />;
 }

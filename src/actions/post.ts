@@ -1,27 +1,35 @@
 "use server";
 
 import { getLoginUserId } from "@/helpers";
-import { authService } from "@/services/authService";
-import { userService } from "@/services/userService";
+import { postSchema } from "@/schema";
 import { PrismaClient } from "@prisma/client";
 import { redirect } from "next/navigation";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function createPostAction(_prevState: any, formData: FormData) {
-  const data = {
+  const old = {
     description: formData.get("description") as string,
   };
 
-  const loginUserId = await getLoginUserId();
+  const validationResult = postSchema.safeParse(old);
 
-  const prisma = new PrismaClient();
+  if (validationResult.success) {
+    const loginUserId = await getLoginUserId();
 
-  await prisma.post.create({
-    data: {
-      userId: loginUserId,
-      ...data,
-    },
-  });
+    const prisma = new PrismaClient();
 
-  redirect(`/profile/${loginUserId}`);
+    await prisma.post.create({
+      data: {
+        userId: loginUserId,
+        ...validationResult.data,
+      },
+    });
+
+    redirect(`/profile/${loginUserId}`);
+  } else {
+    return {
+      validationError: validationResult.error.flatten().fieldErrors,
+      old: old,
+    };
+  }
 }
