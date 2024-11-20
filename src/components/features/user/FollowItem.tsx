@@ -32,9 +32,11 @@ export function FollowItem({ user }: { user: UserFollowing }) {
 
   return src ? (
     <div className="flex items-center justify-between">
-      <div className="items-cetner flex gap-2">
+      <div className="flex items-center gap-2">
         <Link href={`/profile/${user.id}`}>
-          <Avatar src={src} />
+          <div className="h-12 w-12">
+            <Avatar src={src} />
+          </div>
         </Link>
         <div className="font-bold">{user.profile?.name}</div>
       </div>

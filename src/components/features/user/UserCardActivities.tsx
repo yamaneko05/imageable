@@ -11,11 +11,11 @@ import FollowingList from "./FollowingList";
 export default function UserCardActivities({
   user,
   followedByLoginUser,
-  loginUserAuthId,
+  loginUserId,
 }: {
   user: UserForProfilePage;
   followedByLoginUser: boolean;
-  loginUserAuthId: string;
+  loginUserId: string;
 }) {
   const [followed, setfollowed] = useState(followedByLoginUser);
   const [followedByCount, setfollowedByCount] = useState(
@@ -62,7 +62,7 @@ export default function UserCardActivities({
         </Dialog>
       </div>
       <div className="grid grid-cols-2 gap-4">
-        {user.authId === loginUserAuthId ? (
+        {user.id === loginUserId ? (
           <LinkButton
             href="/profile/edit"
             variants={{ size: "sm", color: "secondary" }}

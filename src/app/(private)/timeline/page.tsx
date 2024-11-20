@@ -1,19 +1,16 @@
 import PostCard from "@/components/features/post/PostCard";
 import { PageHeading } from "@/components/ui";
-import { authService } from "@/services/authService";
+import { getLoginUserId } from "@/helpers";
 import { likeService } from "@/services/likeService";
 import { postService } from "@/services/postService";
-import { userService } from "@/services/userService";
 
 export default async function TimelinePage() {
   const posts = await postService.getPostsForTimelinePage();
 
-  const loginUserAuthId = await authService.getLoginUserAuthId();
-  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
+  const loginUserId = await getLoginUserId();
 
-  const likedByLoginUserPostIds = await likeService.getLikedPostIdsByUserId(
-    loginUser.id,
-  );
+  const likedByLoginUserPostIds =
+    await likeService.getLikedPostIdsByUserId(loginUserId);
 
   return (
     <>

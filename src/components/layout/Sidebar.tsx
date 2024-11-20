@@ -6,13 +6,7 @@ import { Avatar, Button } from "@/components/ui";
 import { navItems } from "@/constants";
 import { Profile, User } from "@prisma/client";
 
-export default async function Sidebar({
-  loginUser,
-  profile,
-}: {
-  loginUser: User;
-  profile: Profile;
-}) {
+export default async function Sidebar({ profile }: { profile: Profile }) {
   return (
     <div className="fixed bottom-0 top-0 hidden w-56 border-e px-3 py-6 sm:block">
       <div className="mb-8">
@@ -33,7 +27,7 @@ export default async function Sidebar({
         ))}
       </div>
       <Link
-        href={`/profile/${loginUser.id}`}
+        href={`/profile/${profile.userId}`}
         className="mb-6 flex items-center gap-3 rounded-lg bg-slate-50 p-2"
       >
         <div className="h-10 w-10">

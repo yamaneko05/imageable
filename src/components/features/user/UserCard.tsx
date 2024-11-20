@@ -4,14 +4,14 @@ import { profileService } from "@/services/profileService";
 import { UserForProfilePage } from "@/types";
 import UserCardActivities from "./UserCardActivities";
 import { userService } from "@/services/userService";
+import { getLoginUserId } from "@/helpers";
 
 export default async function UserCard({ user }: { user: UserForProfilePage }) {
-  const loginUserAuthId = await authService.getLoginUserAuthId();
-  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
+  const loginUserId = await getLoginUserId();
 
   const followedByLoginUser = await userService.firstIsFollowedBySecond(
     user.id,
-    loginUser.id,
+    loginUserId,
   );
 
   return (
@@ -22,7 +22,7 @@ export default async function UserCard({ user }: { user: UserForProfilePage }) {
         </div>
         <UserCardActivities
           user={user}
-          loginUserAuthId={loginUserAuthId}
+          loginUserId={loginUserId}
           followedByLoginUser={followedByLoginUser}
         />
       </div>

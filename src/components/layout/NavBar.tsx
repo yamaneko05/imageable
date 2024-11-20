@@ -7,13 +7,7 @@ import { Avatar } from "../ui";
 import { useEffect, useState } from "react";
 import { profileServiceBrowser } from "@/services/profileServiceBrowser";
 
-export default function NavBar({
-  loginUser,
-  profile,
-}: {
-  loginUser: User;
-  profile: Profile;
-}) {
+export default function NavBar({ profile }: { profile: Profile }) {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -56,7 +50,7 @@ export default function NavBar({
         <Image src="/logo.png" alt="" width={150} height={30} />
       </Link>
       {imageUrl && (
-        <Link href={`/profile/${loginUser.id}`} className="h-12 w-12">
+        <Link href={`/profile/${profile.userId}`} className="h-12 w-12">
           <Avatar src={imageUrl} />
         </Link>
       )}
