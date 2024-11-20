@@ -16,18 +16,22 @@ export default async function UserCard({ user }: { user: UserForProfilePage }) {
 
   return (
     <div className="mb-4">
-      <div className="mb-2 flex flex-col items-center gap-4 sm:flex-row sm:gap-8">
-        <div className="h-24 w-24 sm:h-32 sm:w-32">
-          <Avatar src={await profileService.getImageUrl(user.profile!.image)} />
+      <div className="mb-2">
+        <div className="mb-2 flex items-center gap-4">
+          <div className="h-24 w-24 sm:h-32 sm:w-32">
+            <Avatar
+              src={await profileService.getImageUrl(user.profile!.image)}
+            />
+          </div>
+          <UserCardActivities
+            user={user}
+            loginUserId={loginUserId}
+            followedByLoginUser={followedByLoginUser}
+          />
         </div>
-        <UserCardActivities
-          user={user}
-          loginUserId={loginUserId}
-          followedByLoginUser={followedByLoginUser}
-        />
+        <div className="mb-1 text-lg font-bold">{user.profile?.name}</div>
+        <div className="">{user.profile?.description}</div>
       </div>
-      <div className="text-lg font-bold">{user.profile?.name}</div>
-      <div className="text-sm">{user.profile?.description}</div>
     </div>
   );
 }

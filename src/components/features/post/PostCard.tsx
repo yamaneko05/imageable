@@ -16,7 +16,7 @@ export default async function PostCard({
   likedByLoginUser: boolean;
 }) {
   return (
-    <div key={post.id} className="flex gap-3 py-4">
+    <div key={post.id} className="flex gap-3 py-4 first:pt-0 last:pb-0">
       <div className="pt-2">
         <Link href={`/profile/${post.user.id}`}>
           <div className="h-12 w-12">
