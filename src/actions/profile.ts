@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { storageService } from "@/services/storageService";
 import { redirect } from "next/navigation";
 import { userService } from "@/services/userService";
+import { imageService } from "@/services/imageService";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function update(_prevState: any, formData: FormData) {
@@ -32,7 +33,10 @@ export async function update(_prevState: any, formData: FormData) {
 }
 
 export async function uploadImage(image: File) {
-  const { path } = await storageService.uploadImage(image);
+  const extension = imageService.getExtension(image) as string;
+  const resized = await imageService.resize(image);
+
+  const { path } = await storageService.upload(resized, extension);
 
   const loginUserAuthId = await authService.getLoginUserAuthId();
   const loginUser = await userService.getUserByAuthId(loginUserAuthId);
@@ -48,8 +52,9 @@ export async function uploadImage(image: File) {
     },
   });
 
-  revalidatePath("/profile/edit");
-  return { success: true };
+  const newImageUrl = await storageService.getPublicUrl(path);
+
+  return { newImageUrl };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

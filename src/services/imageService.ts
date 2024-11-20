@@ -14,4 +14,5 @@ export const imageService = {
 
     return resized;
   },
+  getExtension: (image: File) => image.name.split(".").pop(),
 };

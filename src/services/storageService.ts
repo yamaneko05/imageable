@@ -1,5 +1,4 @@
 import { createClient } from "@/utils/supabase/server";
-import { imageService } from "./imageService";
 
 const BUCKET_ID = "profile-images";
 
@@ -11,16 +10,14 @@ export const storageService = {
 
     return data.publicUrl;
   },
-  uploadImage: async (image: File) => {
-    const resized = await imageService.resize(image);
-
+  upload: async (buf: Buffer, extension: string) => {
     const supabase = await createClient();
 
-    const path = crypto.randomUUID() + "." + image.name.split(".").pop();
+    const path = crypto.randomUUID() + "." + extension;
 
     const { data, error } = await supabase.storage
       .from(BUCKET_ID)
-      .upload(path, resized);
+      .upload(path, buf);
 
     if (error) {
       console.log(error);
