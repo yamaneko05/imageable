@@ -8,6 +8,13 @@ export default function UploadImageForm({ imageUrl }: { imageUrl: string }) {
   const [src, setSrc] = useState<string>(imageUrl);
   const [isPending, setIsPending] = useState(false);
 
+  const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    setIsPending(true);
+    const { newImageUrl } = await uploadImage(event.target.files![0]);
+    setIsPending(false);
+    setSrc(newImageUrl);
+  };
+
   return (
     <div className="mb-6 rounded-xl bg-zinc-200 p-3">
       <div className="flex items-center justify-between">
@@ -16,17 +23,10 @@ export default function UploadImageForm({ imageUrl }: { imageUrl: string }) {
         </div>
         <InputButton
           variants={{ size: "sm" }}
-          attributes={{
-            type: "file",
-            accept: "image/*",
-            disabled: isPending,
-            onChange: async (event: ChangeEvent<HTMLInputElement>) => {
-              setIsPending(true);
-              const { newImageUrl } = await uploadImage(event.target.files![0]);
-              setIsPending(false);
-              setSrc(newImageUrl);
-            },
-          }}
+          type="file"
+          accept="image/*"
+          disabled={isPending}
+          onChange={handleImageChange}
           isPending={isPending}
           id="js-image-input"
         >

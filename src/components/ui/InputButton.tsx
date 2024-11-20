@@ -2,19 +2,20 @@ import { button } from "@/variants";
 import { LucideLoader2 } from "lucide-react";
 import { VariantProps } from "tailwind-variants";
 
-export default function InputButton({
-  children,
-  attributes,
-  variants,
-  id,
-  isPending,
-}: {
+interface Props extends React.ComponentProps<"input"> {
   children: React.ReactNode;
-  attributes: React.ComponentProps<"input">;
   variants?: VariantProps<typeof button>;
   id: string;
   isPending?: boolean;
-}) {
+}
+
+export default function InputButton({
+  children,
+  variants,
+  id,
+  isPending,
+  ...attributes
+}: Props) {
   return (
     <>
       <input {...attributes} id={id} hidden />

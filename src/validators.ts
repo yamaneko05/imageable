@@ -13,6 +13,7 @@ export const validators = {
           profile: true,
         },
       },
+      media: true,
       _count: {
         select: {
           likedUsers: true,

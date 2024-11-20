@@ -47,7 +47,9 @@ export default function NavBar({ profile }: { profile: Profile }) {
       className={`fixed top-0 flex h-14 w-full items-center justify-between border-b bg-white px-6 transition-transform sm:hidden ${show ? "" : "-translate-y-full"}`}
     >
       <Link href="/">
-        <Image src="/logo.png" alt="" width={150} height={30} />
+        <div className="h-[30px] w-[150px]">
+          <Image src="/logo.png" alt="" width={180} height={36} />
+        </div>
       </Link>
       {imageUrl && (
         <Link href={`/profile/${profile.userId}`} className="h-12 w-12">
