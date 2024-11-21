@@ -1,4 +1,4 @@
-import { getLoginUserId } from "@/helpers";
+import { getLoginUserId } from "@/heplers/getLoginUserId";
 import { redirect } from "next/navigation";
 
 export default async function Page() {

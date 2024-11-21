@@ -4,22 +4,22 @@ import { uploadImage } from "@/actions/profile";
 import { Avatar, InputButton } from "@/components/ui";
 import { ChangeEvent, useState } from "react";
 
-export default function UploadImageForm({ imageUrl }: { imageUrl: string }) {
-  const [src, setSrc] = useState<string>(imageUrl);
+export default function UploadImageForm({ image }: { image: string | null }) {
+  const [profileImage, setProfileImage] = useState(image);
   const [isPending, setIsPending] = useState(false);
 
   const handleImageChange = async (event: ChangeEvent<HTMLInputElement>) => {
     setIsPending(true);
-    const { newImageUrl } = await uploadImage(event.target.files![0]);
+    const { newImage } = await uploadImage(event.target.files![0]);
     setIsPending(false);
-    setSrc(newImageUrl);
+    setProfileImage(newImage);
   };
 
   return (
     <div className="mb-6 rounded-xl bg-zinc-200 p-3">
       <div className="flex items-center justify-between">
         <div className="h-24 w-24">
-          <Avatar src={src} variants={{ border: true }} />
+          <Avatar image={profileImage} variants={{ border: true }} />
         </div>
         <InputButton
           variants={{ size: "sm" }}

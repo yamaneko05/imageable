@@ -6,7 +6,7 @@ export const storageService = {
   getPublicUrl: async (path: string) => {
     const supabase = await createClient();
 
-    const { data } = await supabase.storage.from(BUCKET_ID).getPublicUrl(path);
+    const { data } = supabase.storage.from(BUCKET_ID).getPublicUrl(path);
 
     return data.publicUrl;
   },

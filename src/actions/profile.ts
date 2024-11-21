@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import { storageService } from "@/services/storageService";
 import { redirect } from "next/navigation";
 import { imageService } from "@/services/imageService";
-import { getLoginUserId } from "@/helpers";
+import { getLoginUserId } from "@/heplers/getLoginUserId";
 import { profileSchema } from "@/schema";
 import { revalidatePath } from "next/cache";
 
@@ -56,9 +56,7 @@ export async function uploadImage(image: File) {
     },
   });
 
-  const newImageUrl = await storageService.getPublicUrl(path);
-
-  return { newImageUrl };
+  return { newImage: path };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

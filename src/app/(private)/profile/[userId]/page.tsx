@@ -1,6 +1,6 @@
 import PostCard from "@/components/features/post/PostCard";
 import UserCard from "@/components/features/user/UserCard";
-import { getLoginUserId } from "@/helpers";
+import { getLoginUserId } from "@/heplers/getLoginUserId";
 import { likeService } from "@/services/likeService";
 import { userService } from "@/services/userService";
 

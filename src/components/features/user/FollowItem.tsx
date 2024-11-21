@@ -1,13 +1,10 @@
 import { attach, detach } from "@/actions/follow";
 import { Avatar, Button } from "@/components/ui";
-import { profileServiceBrowser } from "@/services/profileServiceBrowser";
 import { UserFollowing } from "@/types";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function FollowItem({ user }: { user: UserFollowing }) {
-  const [src, setSrc] = useState<string | null>(null);
-
   const [followed, setfollowed] = useState(true);
 
   const handleAttachFollow = async () => {
@@ -20,22 +17,12 @@ export function FollowItem({ user }: { user: UserFollowing }) {
     await detach(user.id);
   };
 
-  useEffect(() => {
-    const getImageUrl = async () => {
-      const imageUrl = await profileServiceBrowser.getImageUrl(
-        user.profile!.image,
-      );
-      setSrc(imageUrl);
-    };
-    getImageUrl();
-  }, []);
-
-  return src ? (
+  return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
         <Link href={`/profile/${user.id}`}>
           <div className="h-12 w-12">
-            <Avatar src={src} />
+            <Avatar image={user.profile!.image} />
           </div>
         </Link>
         <div className="font-bold">{user.profile?.name}</div>
@@ -56,5 +43,5 @@ export function FollowItem({ user }: { user: UserFollowing }) {
         </Button>
       )}
     </div>
-  ) : null;
+  );
 }

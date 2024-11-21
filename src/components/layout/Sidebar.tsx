@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { signout } from "@/actions/auth";
-import { profileService } from "@/services/profileService";
 import { Avatar, Button } from "@/components/ui";
 import { navItems } from "@/constants";
-import { Profile, User } from "@prisma/client";
+import { Profile } from "@prisma/client";
 
 export default async function Sidebar({ profile }: { profile: Profile }) {
   return (
@@ -31,7 +30,7 @@ export default async function Sidebar({ profile }: { profile: Profile }) {
         className="mb-6 flex items-center gap-3 rounded-lg bg-slate-50 p-2"
       >
         <div className="h-10 w-10">
-          <Avatar src={await profileService.getImageUrl(profile.image)} />
+          <Avatar image={profile.image} />
         </div>
         <div className="font-bold">{profile.name}</div>
       </Link>

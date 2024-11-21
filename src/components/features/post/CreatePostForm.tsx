@@ -7,7 +7,7 @@ import { LucideImage, LucideSend } from "lucide-react";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 
-export default function CreatePostForm({ imageUrl }: { imageUrl: string }) {
+export default function CreatePostForm({ image }: { image: string | null }) {
   const [state, setState] =
     useState<Awaited<ReturnType<typeof createPostAction>>>();
   const [isPending, setIsPending] = useState(false);
@@ -59,7 +59,7 @@ export default function CreatePostForm({ imageUrl }: { imageUrl: string }) {
       <div className="flex gap-2">
         <div className="pt-2">
           <div className="h-12 w-12">
-            <Avatar src={imageUrl} />
+            <Avatar image={image} />
           </div>
         </div>
         <div className="flex-1">

@@ -1,5 +1,5 @@
-import { authService } from "./services/authService";
-import { userService } from "./services/userService";
+import { authService } from "../services/authService";
+import { userService } from "../services/userService";
 
 export async function getLoginUserId() {
   const loginUserAuthId = await authService.getLoginUserAuthId();

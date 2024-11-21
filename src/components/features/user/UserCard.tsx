@@ -1,10 +1,8 @@
 import { Avatar } from "@/components/ui";
-import { authService } from "@/services/authService";
-import { profileService } from "@/services/profileService";
 import { UserForProfilePage } from "@/types";
 import UserCardActivities from "./UserCardActivities";
 import { userService } from "@/services/userService";
-import { getLoginUserId } from "@/helpers";
+import { getLoginUserId } from "@/heplers/getLoginUserId";
 
 export default async function UserCard({ user }: { user: UserForProfilePage }) {
   const loginUserId = await getLoginUserId();
@@ -19,9 +17,7 @@ export default async function UserCard({ user }: { user: UserForProfilePage }) {
       <div className="mb-2">
         <div className="mb-2 flex items-center gap-4">
           <div className="h-24 w-24 sm:h-32 sm:w-32">
-            <Avatar
-              src={await profileService.getImageUrl(user.profile!.image)}
-            />
+            <Avatar image={user.profile!.image} />
           </div>
           <UserCardActivities
             user={user}

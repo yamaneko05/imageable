@@ -1,14 +1,7 @@
 "use client";
 
 import { Profile } from "@prisma/client";
-import {
-  Alert,
-  Button,
-  FormField,
-  FormLabel,
-  Input,
-  Textarea,
-} from "@/components/ui";
+import { Button, FormField, Input, Textarea } from "@/components/ui";
 import { useActionState } from "react";
 import { update } from "@/actions/profile";
 

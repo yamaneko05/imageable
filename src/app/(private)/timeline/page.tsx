@@ -1,5 +1,5 @@
 import PostCard from "@/components/features/post/PostCard";
-import { getLoginUserId } from "@/helpers";
+import { getLoginUserId } from "@/heplers/getLoginUserId";
 import { likeService } from "@/services/likeService";
 import { postService } from "@/services/postService";
 

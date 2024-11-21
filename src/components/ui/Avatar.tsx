@@ -1,17 +1,20 @@
+import { getProfileImageUrl } from "@/heplers/getProfileImageUrl";
 import { avatarImage } from "@/variants";
 import Image from "next/image";
 import { VariantProps } from "tailwind-variants";
 
 export default function Avatar({
-  src,
+  image,
   variants,
 }: {
-  src: string;
+  image: string | null;
   variants?: VariantProps<typeof avatarImage>;
 }) {
+  const profileImageUrl = getProfileImageUrl(image);
+
   return (
     <Image
-      src={src}
+      src={profileImageUrl}
       alt=""
       width={240}
       height={240}

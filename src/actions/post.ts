@@ -1,6 +1,6 @@
 "use server";
 
-import { getLoginUserId } from "@/helpers";
+import { getLoginUserId } from "@/heplers/getLoginUserId";
 import { postSchema } from "@/schema";
 import { storageService } from "@/services/storageService";
 import { PrismaClient } from "@prisma/client";
@@ -49,4 +49,23 @@ export async function createPostAction(
       validationError: validationResult.error.flatten().fieldErrors,
     };
   }
+}
+
+export async function deletePostAction(postId: string) {
+  const prisma = new PrismaClient();
+
+  const post = await prisma.post.findUniqueOrThrow({ where: { id: postId } });
+  const loginUserId = await getLoginUserId();
+
+  if (post.userId !== loginUserId) {
+    return { error: "この投稿を削除する権限がありません" };
+  }
+
+  const deleteLikes = prisma.like.deleteMany({ where: { postId: postId } });
+  const deleteMedia = prisma.media.deleteMany({ where: { postId: postId } });
+  const deletePost = prisma.post.delete({ where: { id: postId } });
+
+  await prisma.$transaction([deleteLikes, deleteMedia, deletePost]);
+
+  return { success: true };
 }

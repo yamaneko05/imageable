@@ -2,7 +2,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import { profileService } from "@/services/profileService";
 import Bottombar from "@/components/layout/BottomBar";
 import NavBar from "@/components/layout/NavBar";
-import { getLoginUserId } from "@/helpers";
+import { getLoginUserId } from "@/heplers/getLoginUserId";
 
 export default async function PrivateLayout({
   children,

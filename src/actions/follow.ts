@@ -1,6 +1,6 @@
 "use server";
 
-import { getLoginUserId } from "@/helpers";
+import { getLoginUserId } from "@/heplers/getLoginUserId";
 import { PrismaClient } from "@prisma/client";
 
 export async function attach(userId: string) {
