@@ -2,12 +2,12 @@
 
 import { getExtension, resize } from "@/actions/image";
 import { createPostAction } from "@/actions/post";
-import { Button, FormField, InputButton, Textarea } from "@/components/ui";
+import { Avatar, Button, InputButton, Textarea } from "@/components/ui";
 import { LucideImage, LucideSend } from "lucide-react";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 
-export default function CreatePostForm() {
+export default function CreatePostForm({ imageUrl }: { imageUrl: string }) {
   const [state, setState] =
     useState<Awaited<ReturnType<typeof createPostAction>>>();
   const [isPending, setIsPending] = useState(false);
@@ -50,53 +50,61 @@ export default function CreatePostForm() {
 
   return (
     <>
-      <div className="flex flex-row-reverse">
+      <div className="mb-2 flex flex-row-reverse">
         <Button onClick={dispatch} disabled={isPending} isPending={isPending}>
           投稿
           <LucideSend className="ms-1 inline-block" />
         </Button>
       </div>
-      <div className="mb-4">
-        <FormField
-          id="description"
-          label="本文"
-          errors={state?.validationError?.description}
-        >
-          <Textarea
-            name="description"
-            id="description"
-            placeholder="いまどうしてる？"
-            autoFocus={true}
-            rows={6}
-            value={description}
-            onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
-              setDescription(event.target.value)
-            }
-            error={state?.validationError?.description !== undefined}
-          />
-        </FormField>
-      </div>
-      {mediaDataUrl && (
-        <Image
-          src={mediaDataUrl}
-          width={1080}
-          height={1080}
-          alt=""
-          className="mb-4 rounded-xl"
-        />
-      )}
-      <div className="mb-4">
-        <InputButton
-          type="file"
-          accept="image/*"
-          disabled={mediaIsPending}
-          onChange={handleMediaChange}
-          isPending={mediaIsPending}
-          id="js-image-input"
-          variants={{ outline: true, size: "sm" }}
-        >
-          <LucideImage className="inline-block" />
-        </InputButton>
+      <div className="flex gap-2">
+        <div className="pt-2">
+          <div className="h-12 w-12">
+            <Avatar src={imageUrl} />
+          </div>
+        </div>
+        <div className="flex-1">
+          <div className="mb-4">
+            <Textarea
+              name="description"
+              id="description"
+              placeholder="いまどうしてる？"
+              autoFocus={true}
+              rows={6}
+              value={description}
+              onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+                setDescription(event.target.value)
+              }
+              error={state?.validationError?.description !== undefined}
+            />
+            {state?.validationError?.description && (
+              <div className="text-sm text-red-500">
+                {state?.validationError?.description}
+              </div>
+            )}
+          </div>
+          {mediaDataUrl && (
+            <Image
+              src={mediaDataUrl}
+              width={1080}
+              height={1080}
+              alt=""
+              className="mb-4 rounded-xl"
+            />
+          )}
+          <div className="mb-4">
+            <InputButton
+              type="file"
+              accept="image/*"
+              disabled={mediaIsPending}
+              onChange={handleMediaChange}
+              isPending={mediaIsPending}
+              id="js-image-input"
+              variants={{ outline: true, size: "sm" }}
+            >
+              <LucideImage className="inline-block" />
+            </InputButton>
+          </div>
+        </div>
       </div>
     </>
   );
