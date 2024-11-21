@@ -24,6 +24,7 @@ export default async function ProfilePage({
       <div className="">
         {user.posts.map((post) => (
           <PostCard
+            loginUserId={loginUserId}
             key={post.id}
             post={post}
             likedByLoginUser={likedByLoginUserPostIds.includes(post.id)}

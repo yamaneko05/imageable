@@ -18,6 +18,7 @@ export default async function TimelinePage() {
           <PostCard
             key={post.id}
             post={post}
+            loginUserId={loginUserId}
             likedByLoginUser={likedByLoginUserPostIds.includes(post.id)}
           />
         ))}

@@ -13,9 +13,11 @@ import { deletePostAction } from "@/actions/post";
 
 export default function PostCard({
   post,
+  loginUserId,
   likedByLoginUser,
 }: {
   post: PostWithRelations;
+  loginUserId: string;
   likedByLoginUser: boolean;
 }) {
   const [isDeleted, setIsDeleted] = useState(false);
@@ -46,9 +48,11 @@ export default function PostCard({
               {dayjs(post.createdAt).fromNow()}
             </div>
           </div>
-          <button onClick={handleDeleteClick}>
-            <LucideTrash2 />
-          </button>
+          {post.userId === loginUserId && (
+            <button onClick={handleDeleteClick}>
+              <LucideTrash2 />
+            </button>
+          )}
         </div>
         {post.media && (
           <div className="py-1">
