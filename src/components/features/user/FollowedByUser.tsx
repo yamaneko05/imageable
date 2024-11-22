@@ -4,7 +4,7 @@ import { UserFollowing } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
 
-export function FollowItem({ user }: { user: UserFollowing }) {
+export function FollowingUser({ user }: { user: UserFollowing }) {
   const [followed, setfollowed] = useState(true);
 
   const handleAttachFollow = async () => {

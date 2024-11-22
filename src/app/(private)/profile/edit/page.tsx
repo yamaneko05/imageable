@@ -12,9 +12,7 @@ export default async function ProfilePage() {
     <>
       <PageHeading>プロフィールを編集</PageHeading>
       <div className="max-w-96">
-        <UploadImageForm
-          imageUrl={profileService.getImageUrl(profile!.image)}
-        />
+        <UploadImageForm image={profile!.image} />
         <EditProfileForm profile={profile!} />
       </div>
     </>

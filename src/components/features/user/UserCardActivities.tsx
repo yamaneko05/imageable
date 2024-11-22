@@ -7,6 +7,7 @@ import { Button, LinkButton } from "@/components/ui";
 import { useDialog } from "@/hooks/useDialog";
 import Dialog from "@/components/ui/Dialog";
 import FollowingList from "./FollowingList";
+import FollowedByList from "./FollowedByList";
 
 export default function UserCardActivities({
   user,
@@ -35,6 +36,7 @@ export default function UserCardActivities({
   };
 
   const followingDialog = useDialog();
+  const followedByDialog = useDialog();
 
   return (
     <div className="">
@@ -44,8 +46,10 @@ export default function UserCardActivities({
           <div className="text-sm">投稿</div>
         </div>
         <div className="text-center">
-          <div className="text-xl font-bold">{followedByCount}</div>
-          <div className="text-sm">フォロワー</div>
+          <button onClick={followedByDialog.handleOpen}>
+            <div className="text-xl font-bold">{followedByCount}</div>
+            <div className="text-sm">フォロワー</div>
+          </button>
         </div>
         <div className="text-center">
           <button onClick={followingDialog.handleOpen}>
@@ -53,6 +57,13 @@ export default function UserCardActivities({
             <div className="text-sm">フォロー中</div>
           </button>
         </div>
+        <Dialog
+          isOpen={followedByDialog.isOpen}
+          handleClose={followedByDialog.handleClose}
+          title="フォロワー"
+        >
+          <FollowedByList userId={user.id} />
+        </Dialog>
         <Dialog
           isOpen={followingDialog.isOpen}
           handleClose={followingDialog.handleClose}
@@ -65,7 +76,7 @@ export default function UserCardActivities({
         {user.id === loginUserId ? (
           <LinkButton
             href="/profile/edit"
-            variants={{ size: "sm", color: "secondary" }}
+            variants={{ size: "sm", color: "success" }}
           >
             プロフィールを編集
           </LinkButton>

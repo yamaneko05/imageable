@@ -7,3 +7,8 @@ export async function getUserFollowing(userId: string) {
 
   return users;
 }
+export async function getUserFollowedBy(userId: string) {
+  const users = await userService.getUserFollowedBy(userId);
+
+  return users;
+}

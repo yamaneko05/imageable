@@ -22,10 +22,10 @@ export const userService = {
 
     return user;
   },
-  getUserFollowed: async (userId: string) => {
+  getUserFollowedBy: async (userId: string) => {
     const prisma = new PrismaClient();
 
-    const users = await prisma.user.findMany(validators.userFollowed(userId));
+    const users = await prisma.user.findMany(validators.userFollowedBy(userId));
 
     return users;
   },

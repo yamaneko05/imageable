@@ -48,7 +48,7 @@ export const validators = {
     );
     return validator;
   },
-  userFollowed: (userId: string) => {
+  userFollowedBy: (userId: string) => {
     const validator = Prisma.validator<Prisma.UserFindManyArgs>()({
       where: {
         following: {
