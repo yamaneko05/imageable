@@ -56,13 +56,15 @@ export default function PostCard({
         </div>
         {post.media && (
           <div className="py-1">
-            <Image
-              src={getPublicUrl(post.media.media)}
-              width={1080}
-              height={1080}
-              alt=""
-              className="rounded-xl"
-            />
+            <Link href={`/image/${post.media.media}`}>
+              <Image
+                src={getPublicUrl(post.media.media)}
+                width={1080}
+                height={1080}
+                alt=""
+                className="rounded-xl"
+              />
+            </Link>
           </div>
         )}
         <div className="mb-1">{post.description}</div>
