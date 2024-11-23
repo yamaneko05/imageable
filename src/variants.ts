@@ -8,8 +8,9 @@ export const button = tv({
       success: "bg-green-500 hover:bg-green-700",
       secondary: "bg-slate-500 hover:bg-slate-700",
     },
-    outline: {
-      true: "border-2 bg-transparent",
+    variant: {
+      outline: "border-2 bg-transparent",
+      ghost: "bg-transparent text-black hover:bg-slate-50",
     },
     size: {
       sm: "rounded-lg px-3 py-1 text-sm",
@@ -67,5 +68,20 @@ export const avatarImage = tv({
     border: {
       true: "border border-black",
     },
+  },
+});
+
+export const modal = tv({
+  base: "max-w-full rounded-lg bg-white px-6 py-5 shadow backdrop:bg-black backdrop:bg-opacity-50",
+  variants: {
+    size: {
+      sm: "w-72",
+      md: "w-96",
+      lg: "w-[640px]",
+      xl: "w-[960px]",
+    },
+  },
+  defaultVariants: {
+    size: "md",
   },
 });

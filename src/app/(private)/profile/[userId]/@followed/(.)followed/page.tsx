@@ -11,13 +11,11 @@ export default async function ImagePage({
   const users = await userService.getUserFollowedBy(userId);
 
   return (
-    <Modal>
-      <div className="w-72">
-        <div className="space-y-1">
-          {users.map((user) => (
-            <FollowedUser key={userId} user={user} />
-          ))}
-        </div>
+    <Modal title="フォロワー">
+      <div className="space-y-1">
+        {users.map((user) => (
+          <FollowedUser key={userId} user={user} />
+        ))}
       </div>
     </Modal>
   );

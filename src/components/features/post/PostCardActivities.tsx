@@ -1,6 +1,6 @@
 "use client";
 
-import { attach, detach } from "@/actions/like";
+import { likeAction, unlikeAction } from "@/actions/like";
 import { PostWithRelations } from "@/types";
 import { LucideHeart, LucideMessageCircle } from "lucide-react";
 import { useState } from "react";
@@ -19,11 +19,11 @@ export default function PostCardActivities({
     if (liked) {
       setLikedUserCount((count) => count - 1);
       setLiked(false);
-      await detach(post.id);
+      await unlikeAction(post.id);
     } else {
       setLikedUserCount((count) => count + 1);
       setLiked(true);
-      await attach(post.id);
+      await likeAction(post.id);
     }
   };
 

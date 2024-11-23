@@ -1,6 +1,6 @@
 "use client";
 
-import { attach, detach } from "@/actions/follow";
+import { followAction, unfollowAction } from "@/actions/follow";
 import { Avatar, Button } from "@/components/ui";
 import { UserFollowing } from "@/types";
 import Link from "next/link";
@@ -9,14 +9,14 @@ import { useState } from "react";
 export function FollowedUser({ user }: { user: UserFollowing }) {
   const [followed, setfollowed] = useState(true);
 
-  const handleAttachFollow = async () => {
+  const handleFollow = async () => {
     setfollowed(true);
-    await attach(user.id);
+    await followAction(user.id);
   };
 
-  const handleDetachFollow = async () => {
+  const handleUnfollow = async () => {
     setfollowed(false);
-    await detach(user.id);
+    await unfollowAction(user.id);
   };
 
   return (
@@ -31,14 +31,14 @@ export function FollowedUser({ user }: { user: UserFollowing }) {
       </div>
       {followed ? (
         <Button
-          onClick={handleDetachFollow}
+          onClick={handleUnfollow}
           variants={{ size: "sm", color: "secondary" }}
         >
           フォロー中
         </Button>
       ) : (
         <Button
-          onClick={handleAttachFollow}
+          onClick={handleFollow}
           variants={{ size: "sm", color: "primary" }}
         >
           フォロー

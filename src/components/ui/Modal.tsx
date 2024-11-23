@@ -5,8 +5,18 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui";
 import { LucideX } from "lucide-react";
 import { createPortal } from "react-dom";
+import { modal } from "@/variants";
+import { VariantProps } from "tailwind-variants";
 
-export default function Modal({ children }: { children: React.ReactNode }) {
+export default function Modal({
+  children,
+  variants,
+  title,
+}: {
+  children: React.ReactNode;
+  variants?: VariantProps<typeof modal>;
+  title: string;
+}) {
   const router = useRouter();
   const dialogRef = useRef<ElementRef<"dialog">>(null);
 
@@ -21,23 +31,15 @@ export default function Modal({ children }: { children: React.ReactNode }) {
   }
 
   return createPortal(
-    <div className="fixed inset-0 grid place-items-center bg-black bg-opacity-50 backdrop-blur-sm">
-      <dialog
-        ref={dialogRef}
-        className="rounded-lg bg-white p-4"
-        onClose={onDismiss}
-      >
-        {children}
-        <div className="mt-4 flex flex-row-reverse">
-          <Button
-            onClick={onDismiss}
-            variants={{ color: "secondary", size: "sm" }}
-          >
-            <LucideX />
-          </Button>
-        </div>
-      </dialog>
-    </div>,
+    <dialog ref={dialogRef} className={modal(variants)} onClose={onDismiss}>
+      <div className="flex justify-between">
+        <div className="text-lg font-bold">{title}</div>
+        <Button onClick={onDismiss} variants={{ variant: "ghost", size: "sm" }}>
+          <LucideX />
+        </Button>
+      </div>
+      <div className="mt-4">{children}</div>
+    </dialog>,
     document.getElementById("modal-root")!,
   );
 }

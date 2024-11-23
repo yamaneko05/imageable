@@ -10,10 +10,8 @@ export default async function ImagePage({
   const path = (await params).path;
 
   return (
-    <Modal>
-      <div className="w-[560px]">
-        <Image src={getPublicUrl(path)} width={1080} height={1080} alt="" />
-      </div>
+    <Modal title="" variants={{ size: "xl" }}>
+      <Image src={getPublicUrl(path)} width={1080} height={1080} alt="" />
     </Modal>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { attach, detach } from "@/actions/follow";
+import { followAction, unfollowAction } from "@/actions/follow";
 import { UserForProfilePage } from "@/types";
 import { useState } from "react";
 import { Button, LinkButton } from "@/components/ui";
@@ -20,16 +20,16 @@ export default function UserCardActivities({
     user._count.followedBy,
   );
 
-  const handleAttachFollow = async () => {
+  const handleFollow = async () => {
     setfollowed(true);
     setfollowedByCount((prev) => prev + 1);
-    await attach(user.id);
+    await followAction(user.id);
   };
 
-  const handleDetachFollow = async () => {
+  const handleUnfollow = async () => {
     setfollowed(false);
     setfollowedByCount((prev) => prev - 1);
-    await detach(user.id);
+    await unfollowAction(user.id);
   };
 
   return (
@@ -62,14 +62,14 @@ export default function UserCardActivities({
           </LinkButton>
         ) : followed ? (
           <Button
-            onClick={handleDetachFollow}
+            onClick={handleUnfollow}
             variants={{ size: "sm", color: "secondary" }}
           >
             フォロー中
           </Button>
         ) : (
           <Button
-            onClick={handleAttachFollow}
+            onClick={handleFollow}
             variants={{ size: "sm", color: "primary" }}
           >
             フォロー

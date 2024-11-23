@@ -3,7 +3,7 @@
 import { getLoginUserId } from "@/heplers/getLoginUserId";
 import { PrismaClient } from "@prisma/client";
 
-export async function attach(userId: string) {
+export async function followAction(userId: string) {
   const loginUserId = await getLoginUserId();
 
   const prisma = new PrismaClient();
@@ -20,7 +20,7 @@ export async function attach(userId: string) {
   });
 }
 
-export async function detach(userId: string) {
+export async function unfollowAction(userId: string) {
   const loginUserId = await getLoginUserId();
 
   const prisma = new PrismaClient();
