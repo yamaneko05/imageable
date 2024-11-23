@@ -5,9 +5,12 @@ import { createPostAction } from "@/actions/post";
 import { Avatar, Button, InputButton, Textarea } from "@/components/ui";
 import { LucideImage, LucideSend } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
 export default function CreatePostForm({ image }: { image: string | null }) {
+  const router = useRouter();
+
   const [state, setState] =
     useState<Awaited<ReturnType<typeof createPostAction>>>();
   const [isPending, setIsPending] = useState(false);
@@ -19,6 +22,10 @@ export default function CreatePostForm({ image }: { image: string | null }) {
 
     const newState = await createPostAction(description!, media);
 
+    if (newState.success) {
+      router.back();
+    }
+
     setState(newState);
     setIsPending(false);
   };
@@ -28,11 +35,18 @@ export default function CreatePostForm({ image }: { image: string | null }) {
 
   const [mediaDataUrl, setMediaDataUrl] = useState<string>();
 
+  const [uploadError, setUploadError] = useState<string>();
+
   const handleMediaChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setMediaIsPending(true);
     const file = event.target.files![0];
+    if (file.size > 1024 * 1024) {
+      setUploadError("1MB以上の画像は投稿できません");
+      setMediaIsPending(false);
+      return;
+    }
     const buf = await resize(file, {
       width: 1080,
     });
@@ -48,15 +62,9 @@ export default function CreatePostForm({ image }: { image: string | null }) {
 
   return (
     <>
-      <div className="mb-2 flex flex-row-reverse">
-        <Button onClick={dispatch} disabled={isPending} isPending={isPending}>
-          投稿
-          <LucideSend className="ms-1 inline-block" />
-        </Button>
-      </div>
       <div className="flex gap-2">
         <div className="pt-2">
-          <div className="h-12 w-12">
+          <div className="h-10 w-10">
             <Avatar image={image} />
           </div>
         </div>
@@ -80,13 +88,16 @@ export default function CreatePostForm({ image }: { image: string | null }) {
               </div>
             )}
           </div>
+          {uploadError && (
+            <div className="mb-2 text-red-500">エラー: {uploadError}</div>
+          )}
           {mediaDataUrl && (
             <Image
               src={mediaDataUrl}
               width={1080}
               height={1080}
               alt=""
-              className="mb-4 rounded-xl"
+              className="mb-4 rounded-lg"
             />
           )}
           <div className="mb-4">
@@ -97,12 +108,18 @@ export default function CreatePostForm({ image }: { image: string | null }) {
               onChange={handleMediaChange}
               isPending={mediaIsPending}
               id="js-image-input"
-              variants={{ outline: true, size: "sm" }}
+              variants={{ variant: "ghost", size: "sm" }}
             >
               <LucideImage className="inline-block" />
             </InputButton>
           </div>
         </div>
+      </div>
+      <div className="mt-2 flex flex-row-reverse">
+        <Button onClick={dispatch} disabled={isPending} isPending={isPending}>
+          投稿
+          <LucideSend className="ms-1 inline-block" size={18} />
+        </Button>
       </div>
     </>
   );

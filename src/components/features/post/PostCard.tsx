@@ -34,7 +34,7 @@ export default function PostCard({
     >
       <div className="pt-2">
         <Link href={`/profile/${post.user.id}`}>
-          <div className="h-12 w-12">
+          <div className="h-10 w-10">
             <Avatar image={post.user.profile!.image} />
           </div>
         </Link>
@@ -62,7 +62,7 @@ export default function PostCard({
                 width={1080}
                 height={1080}
                 alt=""
-                className="rounded-xl"
+                className="max-h-96 rounded-xl object-contain"
               />
             </Link>
           </div>

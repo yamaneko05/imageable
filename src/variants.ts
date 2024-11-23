@@ -72,13 +72,13 @@ export const avatarImage = tv({
 });
 
 export const modal = tv({
-  base: "max-w-full rounded-lg bg-white px-6 py-5 shadow backdrop:bg-black backdrop:bg-opacity-50",
+  base: "mt-16 max-w-full rounded-lg bg-white p-4 shadow backdrop:bg-black backdrop:bg-opacity-50",
   variants: {
     size: {
       sm: "w-72",
       md: "w-96",
-      lg: "w-[640px]",
-      xl: "w-[960px]",
+      lg: "w-[480px]",
+      xl: "w-[720px]",
     },
   },
   defaultVariants: {

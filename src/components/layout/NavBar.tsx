@@ -37,7 +37,7 @@ export default function NavBar({ profile }: { profile: Profile }) {
           <Image src="/logo.png" alt="" width={180} height={36} />
         </div>
       </Link>
-      <Link href={`/profile/${profile.userId}`} className="h-12 w-12">
+      <Link href={`/profile/${profile.userId}`} className="h-10 w-10">
         <Avatar image={profile.image} />
       </Link>
     </div>

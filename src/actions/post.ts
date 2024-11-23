@@ -4,7 +4,7 @@ import { getLoginUserId } from "@/heplers/getLoginUserId";
 import { postSchema } from "@/schema";
 import { storageService } from "@/services/storageService";
 import { PrismaClient } from "@prisma/client";
-import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function createPostAction(
@@ -43,7 +43,9 @@ export async function createPostAction(
       },
     });
 
-    redirect(`/profile/${loginUserId}`);
+    revalidatePath("/timeline");
+
+    return { success: true };
   } else {
     return {
       validationError: validationResult.error.flatten().fieldErrors,

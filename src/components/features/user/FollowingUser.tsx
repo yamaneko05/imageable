@@ -7,9 +7,9 @@ import Link from "next/link";
 export function FollowingUser({ user }: { user: UserFollowing }) {
   return (
     <div className="flex items-center justify-between">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         <Link href={`/profile/${user.id}`}>
-          <div className="h-12 w-12">
+          <div className="h-10 w-10">
             <Avatar image={user.profile!.image} />
           </div>
         </Link>

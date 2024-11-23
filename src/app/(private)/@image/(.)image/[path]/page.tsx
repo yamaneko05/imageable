@@ -11,7 +11,13 @@ export default async function ImagePage({
 
   return (
     <Modal title="" variants={{ size: "xl" }}>
-      <Image src={getPublicUrl(path)} width={1080} height={1080} alt="" />
+      <Image
+        src={getPublicUrl(path)}
+        width={1080}
+        height={1080}
+        alt=""
+        className="max-h-[480px] object-contain"
+      />
     </Modal>
   );
 }
