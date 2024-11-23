@@ -6,10 +6,10 @@ import { getLoginUserId } from "@/heplers/getLoginUserId";
 
 export default async function PrivateLayout({
   children,
-  modal,
+  image,
 }: {
   children: React.ReactNode;
-  modal: React.ReactNode;
+  image: React.ReactNode;
 }) {
   const loginUserId = await getLoginUserId();
   const profile = await profileService.getProfileByUserId(loginUserId);
@@ -19,12 +19,12 @@ export default async function PrivateLayout({
       <div className="mx-auto max-w-[768px]">
         <NavBar profile={profile} />
         <Sidebar profile={profile} />
-        <div className="py-14 sm:py-4 sm:ps-60">
-          <div className="px-3 py-4">{children}</div>
+        <div className="py-14 sm:py-0 sm:ps-56">
+          <div className="p-3">{children}</div>
         </div>
         <Bottombar />
       </div>
-      {modal}
+      {image}
     </>
   );
 }

@@ -38,10 +38,9 @@ export async function update(_prevState: any, formData: FormData) {
 }
 
 export async function uploadImage(image: File) {
-  const extension = imageService.getExtension(image) as string;
   const resized = await imageService.resize(image);
 
-  const { path } = await storageService.upload(resized, extension);
+  const { path } = await storageService.upload(resized);
 
   const loginUserId = await getLoginUserId();
 

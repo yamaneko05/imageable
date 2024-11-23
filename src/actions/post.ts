@@ -24,7 +24,7 @@ export async function createPostAction(
     let mediaPath = undefined;
 
     if (media) {
-      const { path } = await storageService.upload(media.buf, media.extension);
+      const { path } = await storageService.upload(media.buf);
 
       mediaPath = path;
     }

@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar } from "@/components/ui";
 import { UserFollowing } from "@/types";
 import Link from "next/link";

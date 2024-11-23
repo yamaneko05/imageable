@@ -7,7 +7,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        {children}
+        <div id="modal-root" />
+      </body>
     </html>
   );
 }

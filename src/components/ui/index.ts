@@ -8,3 +8,4 @@ export { default as Textarea } from "./Textarea";
 export { default as InputButton } from "./InputButton";
 export { default as Avatar } from "./Avatar";
 export { default as FormField } from "./FormField";
+export { default as Modal } from "./Modal";

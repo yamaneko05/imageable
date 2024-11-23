@@ -10,10 +10,10 @@ export const storageService = {
 
     return data.publicUrl;
   },
-  upload: async (buf: Buffer, extension: string) => {
+  upload: async (buf: Buffer) => {
     const supabase = await createClient();
 
-    const path = crypto.randomUUID() + "." + extension;
+    const path = crypto.randomUUID() + ".webp";
 
     const { data, error } = await supabase.storage
       .from(BUCKET_ID)

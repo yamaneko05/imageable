@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Modal } from "./Modal";
+import { Modal } from "@/components/ui";
 import { getPublicUrl } from "@/heplers/getPublicUrl";
 
 export default async function ImagePage({

@@ -1,10 +1,12 @@
+"use client";
+
 import { attach, detach } from "@/actions/follow";
 import { Avatar, Button } from "@/components/ui";
 import { UserFollowing } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
 
-export function FollowingUser({ user }: { user: UserFollowing }) {
+export function FollowedUser({ user }: { user: UserFollowing }) {
   const [followed, setfollowed] = useState(true);
 
   const handleAttachFollow = async () => {

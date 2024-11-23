@@ -4,8 +4,9 @@ import { type ElementRef, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui";
 import { LucideX } from "lucide-react";
+import { createPortal } from "react-dom";
 
-export function Modal({ children }: { children: React.ReactNode }) {
+export default function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const dialogRef = useRef<ElementRef<"dialog">>(null);
 
@@ -19,7 +20,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
     router.back();
   }
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 grid place-items-center bg-black bg-opacity-50 backdrop-blur-sm">
       <dialog
         ref={dialogRef}
@@ -36,6 +37,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
           </Button>
         </div>
       </dialog>
-    </div>
+    </div>,
+    document.getElementById("modal-root")!,
   );
 }

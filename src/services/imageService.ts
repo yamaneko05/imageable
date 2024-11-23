@@ -7,9 +7,9 @@ export const imageService = {
     const resized = await sharp(buffer)
       .resize({
         width: 240,
-        height: 240,
         fit: "cover",
       })
+      .webp()
       .toBuffer();
 
     return resized;

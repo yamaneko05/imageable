@@ -4,10 +4,7 @@ import { attach, detach } from "@/actions/follow";
 import { UserForProfilePage } from "@/types";
 import { useState } from "react";
 import { Button, LinkButton } from "@/components/ui";
-import { useDialog } from "@/hooks/useDialog";
-import Dialog from "@/components/ui/Dialog";
-import FollowingList from "./FollowingList";
-import FollowedByList from "./FollowedByList";
+import Link from "next/link";
 
 export default function UserCardActivities({
   user,
@@ -35,9 +32,6 @@ export default function UserCardActivities({
     await detach(user.id);
   };
 
-  const followingDialog = useDialog();
-  const followedByDialog = useDialog();
-
   return (
     <div className="">
       <div className="mb-4 grid grid-cols-3">
@@ -46,31 +40,17 @@ export default function UserCardActivities({
           <div className="text-sm">投稿</div>
         </div>
         <div className="text-center">
-          <button onClick={followedByDialog.handleOpen}>
+          <Link href={`/profile/${user.id}/followed`}>
             <div className="text-xl font-bold">{followedByCount}</div>
             <div className="text-sm">フォロワー</div>
-          </button>
+          </Link>
         </div>
         <div className="text-center">
-          <button onClick={followingDialog.handleOpen}>
+          <Link href={`/profile/${user.id}/following`}>
             <div className="text-xl font-bold">{user._count.following}</div>
             <div className="text-sm">フォロー中</div>
-          </button>
+          </Link>
         </div>
-        <Dialog
-          isOpen={followedByDialog.isOpen}
-          handleClose={followedByDialog.handleClose}
-          title="フォロワー"
-        >
-          <FollowedByList userId={user.id} />
-        </Dialog>
-        <Dialog
-          isOpen={followingDialog.isOpen}
-          handleClose={followingDialog.handleClose}
-          title="フォロー中"
-        >
-          <FollowingList userId={user.id} />
-        </Dialog>
       </div>
       <div className="grid grid-cols-2 gap-4">
         {user.id === loginUserId ? (

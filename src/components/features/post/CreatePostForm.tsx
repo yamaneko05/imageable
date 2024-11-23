@@ -35,8 +35,6 @@ export default function CreatePostForm({ image }: { image: string | null }) {
     const file = event.target.files![0];
     const buf = await resize(file, {
       width: 1080,
-      height: 1080,
-      fit: "contain",
     });
     const extension = (await getExtension(file)) as string;
 
