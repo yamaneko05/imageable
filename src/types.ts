@@ -10,9 +10,13 @@ export type UserForProfilePage = Prisma.UserGetPayload<
 >;
 
 export type UserFollowed = Prisma.UserGetPayload<
-  ReturnType<typeof validators.userFollowed>
+  ReturnType<typeof validators.userFollowedBy>
 >;
 
 export type UserFollowing = Prisma.UserGetPayload<
   ReturnType<typeof validators.userFollowing>
+>;
+
+export type Comments = Prisma.CommentGetPayload<
+  ReturnType<typeof validators.comments>
 >;

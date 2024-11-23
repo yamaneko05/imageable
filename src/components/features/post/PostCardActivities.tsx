@@ -3,6 +3,7 @@
 import { likeAction, unlikeAction } from "@/actions/like";
 import { PostWithRelations } from "@/types";
 import { LucideHeart, LucideMessageCircle } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function PostCardActivities({
@@ -29,10 +30,12 @@ export default function PostCardActivities({
 
   return (
     <div className="flex gap-3">
-      <div className="flex items-center gap-1">
-        <LucideMessageCircle size={20} />
-        {post._count.comments}
-      </div>
+      <Link href={`/post/${post.id}`}>
+        <div className="flex items-center gap-1">
+          <LucideMessageCircle size={20} />
+          {post._count.comments}
+        </div>
+      </Link>
       <div className="flex items-center gap-1">
         <LucideHeart
           size={20}

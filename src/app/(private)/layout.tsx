@@ -8,10 +8,12 @@ export default async function PrivateLayout({
   children,
   image,
   newpost,
+  post,
 }: {
   children: React.ReactNode;
   image: React.ReactNode;
   newpost: React.ReactNode;
+  post: React.ReactNode;
 }) {
   const loginUserId = await getLoginUserId();
   const profile = await profileService.getProfileByUserId(loginUserId);
@@ -28,6 +30,7 @@ export default async function PrivateLayout({
       </div>
       {image}
       {newpost}
+      {post}
     </>
   );
 }

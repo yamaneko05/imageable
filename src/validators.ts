@@ -78,4 +78,19 @@ export const validators = {
     });
     return validator;
   },
+  comments: (postId: string) => {
+    const validator = Prisma.validator<Prisma.CommentFindManyArgs>()({
+      where: {
+        postId: postId,
+      },
+      include: {
+        user: {
+          include: {
+            profile: true,
+          },
+        },
+      },
+    });
+    return validator;
+  },
 };

@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { LucideEllipsis, LucideTrash2 } from "lucide-react";
 import { deletePostAction } from "@/actions/post";
+import { button } from "@/variants";
 
 export default function PostDropdown({
   postId,
@@ -22,9 +22,9 @@ export default function PostDropdown({
   return (
     <Menu>
       <MenuButton>
-        <Button variants={{ size: "sm", variant: "ghost" }}>
+        <div className={button({ size: "sm", variant: "ghost" })}>
           <LucideEllipsis />
-        </Button>
+        </div>
       </MenuButton>
       <MenuItems anchor="bottom" className="w-64 rounded-lg shadow-lg">
         {deleteable && (
