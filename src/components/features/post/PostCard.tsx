@@ -6,10 +6,10 @@ import dayjs from "@/utils/dayjs";
 import PostCardActivities from "./PostCardActivities";
 import Link from "next/link";
 import Image from "next/image";
-import { LucideDot, LucideTrash2 } from "lucide-react";
+import { LucideDot } from "lucide-react";
 import { getPublicUrl } from "@/heplers/getPublicUrl";
 import { useState } from "react";
-import { deletePostAction } from "@/actions/post";
+import PostDropdown from "./PostDropdown";
 
 export default function PostCard({
   post,
@@ -21,11 +21,6 @@ export default function PostCard({
   likedByLoginUser: boolean;
 }) {
   const [isDeleted, setIsDeleted] = useState(false);
-
-  const handleDeleteClick = async () => {
-    await deletePostAction(post.id);
-    setIsDeleted(true);
-  };
 
   return !isDeleted ? (
     <div
@@ -48,11 +43,11 @@ export default function PostCard({
               {dayjs(post.createdAt).fromNow()}
             </div>
           </div>
-          {post.userId === loginUserId && (
-            <button onClick={handleDeleteClick}>
-              <LucideTrash2 />
-            </button>
-          )}
+          <PostDropdown
+            postId={post.id}
+            setIsDeleted={setIsDeleted}
+            deleteable={post.userId === loginUserId}
+          />
         </div>
         {post.media && (
           <div className="py-1">
