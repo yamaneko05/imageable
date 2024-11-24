@@ -4,16 +4,16 @@ export const navItems = [
   {
     path: "/timeline",
     name: "タイムライン",
-    lucide: <LucideHouse className="inline-block sm:me-3" />,
+    lucide: <LucideHouse size={22} className="inline-block sm:me-3" />,
   },
   {
     path: "/profile",
     name: "プロフィール",
-    lucide: <LucideBookUser className="inline-block sm:me-3" />,
+    lucide: <LucideBookUser size={22} className="inline-block sm:me-3" />,
   },
   {
     path: "/newpost",
     name: "投稿を作成",
-    lucide: <LucidePlusSquare className="inline-block sm:me-3" />,
+    lucide: <LucidePlusSquare size={22} className="inline-block sm:me-3" />,
   },
 ];

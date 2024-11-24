@@ -30,7 +30,7 @@ export default function PostCardActivities({
 
   return (
     <div className="flex gap-3">
-      <Link href={`/post/${post.id}`}>
+      <Link href={`/post/${post.id}/comment`}>
         <div className="flex items-center gap-1">
           <LucideMessageCircle size={20} />
           {post._count.comments}
@@ -45,7 +45,7 @@ export default function PostCardActivities({
           cursor="pointer"
           className="active:animate-bounce"
         />
-        {likedUserCount}
+        <Link href={`/post/${post.id}/like`}>{likedUserCount}</Link>
       </div>
     </div>
   );

@@ -1,10 +1,8 @@
-"use client";
-
 import { Avatar } from "@/components/ui";
 import { UserFollowing } from "@/types";
 import Link from "next/link";
 
-export function FollowingUser({ user }: { user: UserFollowing }) {
+export default function UserRow({ user }: { user: UserFollowing }) {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-3">

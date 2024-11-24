@@ -22,6 +22,7 @@ export default function CreateCommentForm({ postId }: { postId: string }) {
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           setComment(event.target.value)
         }
+        placeholder="コメントを入力..."
       />
       <div className="mt-2 flex flex-row-reverse">
         <Button

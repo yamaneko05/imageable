@@ -1,11 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { signout } from "@/actions/auth";
 import { Avatar, Button } from "@/components/ui";
 import { navItems } from "@/constants";
 import { Profile } from "@prisma/client";
+import { usePathname } from "next/navigation";
 
-export default async function Sidebar({ profile }: { profile: Profile }) {
+export default function Sidebar({ profile }: { profile: Profile }) {
+  const pathname = usePathname();
+
   return (
     <div className="fixed bottom-0 top-0 hidden w-56 border-e px-3 py-6 sm:block">
       <div className="mb-8">
@@ -18,7 +23,7 @@ export default async function Sidebar({ profile }: { profile: Profile }) {
           <Link
             key={navItems.indexOf(item)}
             href={item.path}
-            className="block rounded-lg p-3 hover:bg-slate-50"
+            className={`block rounded-lg p-3 hover:bg-slate-50 ${pathname === item.path && "font-extrabold"}`}
           >
             {item.lucide}
             {item.name}

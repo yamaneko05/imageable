@@ -16,7 +16,7 @@ export default function UploadImageForm({ image }: { image: string | null }) {
   };
 
   return (
-    <div className="mb-6 rounded-xl bg-zinc-200 p-3">
+    <div className="mb-6 rounded-xl bg-slate-50 p-3">
       <div className="flex items-center justify-between">
         <div className="h-24 w-24">
           <Avatar image={profileImage} variants={{ border: true }} />

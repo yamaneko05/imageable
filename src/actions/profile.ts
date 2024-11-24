@@ -38,7 +38,11 @@ export async function update(_prevState: any, formData: FormData) {
 }
 
 export async function uploadImage(image: File) {
-  const resized = await imageService.resize(image);
+  const resized = await imageService.resize(image, {
+    width: 240,
+    height: 240,
+    fit: "cover",
+  });
 
   const { path } = await storageService.upload(resized);
 
