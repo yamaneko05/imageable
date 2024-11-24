@@ -1,6 +1,6 @@
 import { Modal } from "@/components/ui";
 import { userService } from "@/services/userService";
-import UserRow from "@/components/features/user/UserRow";
+import { FollowedUser } from "@/components/features/user/FollowedUser";
 
 export default async function ImagePage({
   params,
@@ -12,9 +12,9 @@ export default async function ImagePage({
 
   return (
     <Modal title="フォロー中">
-      <div className="space-y-1">
+      <div className="space-y-2">
         {users.map((user) => (
-          <UserRow key={userId} user={user} />
+          <FollowedUser key={user.id} user={user} />
         ))}
       </div>
     </Modal>

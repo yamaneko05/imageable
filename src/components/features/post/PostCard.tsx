@@ -10,6 +10,7 @@ import { LucideDot } from "lucide-react";
 import { getPublicUrl } from "@/heplers/getPublicUrl";
 import { useState } from "react";
 import PostDropdown from "./PostDropdown";
+import Linkify from "linkify-react";
 
 export default function PostCard({
   post,
@@ -29,7 +30,7 @@ export default function PostCard({
     >
       <div className="pt-2">
         <Link href={`/profile/${post.user.id}`}>
-          <div className="h-10 w-10">
+          <div className="h-11 w-11">
             <Avatar image={post.user.profile!.image} />
           </div>
         </Link>
@@ -37,7 +38,9 @@ export default function PostCard({
       <div className="flex-1">
         <div className="flex justify-between">
           <div className="flex items-center">
-            <div className="font-bold">{post.user.profile?.name}</div>
+            <div className="font-bold tracking-wide">
+              {post.user.profile?.name}
+            </div>
             <LucideDot />
             <div className="text-sm text-zinc-500">
               {dayjs(post.createdAt).fromNow()}
@@ -62,7 +65,13 @@ export default function PostCard({
             </Link>
           </div>
         )}
-        <div className="-mt-1 mb-1">{post.description}</div>
+        <div className="-mt-1 mb-2">
+          <Linkify
+            options={{ className: "text-blue-500 underline", nl2br: true }}
+          >
+            {post.description}
+          </Linkify>
+        </div>
         <PostCardActivities post={post} likedByLoginUser={likedByLoginUser} />
       </div>
     </div>

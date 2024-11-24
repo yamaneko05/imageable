@@ -73,7 +73,7 @@ export const avatarImage = tv({
 });
 
 export const modal = tv({
-  base: "mt-16 max-w-full rounded-lg bg-white p-4 shadow backdrop:bg-black backdrop:bg-opacity-50",
+  base: "animate-slide-in-bottom mb-0 max-w-full rounded-b-none rounded-t-xl bg-white p-4 pb-24 shadow backdrop:bg-black backdrop:bg-opacity-50 sm:mb-auto sm:mt-16 sm:block sm:animate-none sm:rounded-b-xl sm:pb-4",
   variants: {
     size: {
       sm: "w-72",

@@ -23,7 +23,7 @@ export default function Sidebar({ profile }: { profile: Profile }) {
           <Link
             key={navItems.indexOf(item)}
             href={item.path}
-            className={`block rounded-lg p-3 hover:bg-slate-50 ${pathname === item.path && "font-extrabold"}`}
+            className={`block rounded-lg p-3 hover:bg-slate-50 ${pathname.match(`^${item.path}`) && "font-extrabold"}`}
           >
             {item.lucide}
             {item.name}
