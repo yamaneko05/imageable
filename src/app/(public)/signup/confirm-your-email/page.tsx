@@ -1,12 +1,12 @@
 import SignUpStepper from "@/components/features/auth/SignUpStepper";
 import { LucideMail } from "lucide-react";
 
-export default function ConfirmYourEmailPage({
+export default async function ConfirmYourEmailPage({
   searchParams,
 }: {
-  searchParams: { email: string };
+  searchParams: Promise<{ email: string }>;
 }) {
-  const email = searchParams.email;
+  const email = (await searchParams).email;
 
   return (
     <div className="px-3">
