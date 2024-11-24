@@ -1,18 +1,21 @@
 import Image from "next/image";
 import { Modal } from "@/components/ui";
 import { getPublicUrl } from "@/heplers/getPublicUrl";
+import { mediaService } from "@/services/mediaService";
 
 export default async function ImagePage({
   params,
 }: {
-  params: Promise<{ path: string }>;
+  params: Promise<{ postId: string }>;
 }) {
-  const path = (await params).path;
+  const postId = (await params).postId;
+
+  const media = await mediaService.getMediaByPostId(postId);
 
   return (
     <Modal title="" variants={{ size: "xl" }}>
       <Image
-        src={getPublicUrl(path)}
+        src={getPublicUrl(media.media)}
         width={1080}
         height={1080}
         alt=""

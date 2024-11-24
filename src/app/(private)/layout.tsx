@@ -6,14 +6,10 @@ import { getLoginUserId } from "@/heplers/getLoginUserId";
 
 export default async function PrivateLayout({
   children,
-  image,
-  newpost,
-  post,
+  modal,
 }: {
   children: React.ReactNode;
-  image: React.ReactNode;
-  newpost: React.ReactNode;
-  post: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   const loginUserId = await getLoginUserId();
   const profile = await profileService.getProfileByUserId(loginUserId);
@@ -28,9 +24,7 @@ export default async function PrivateLayout({
         </div>
         <Bottombar />
       </div>
-      {image}
-      {newpost}
-      {post}
+      {modal}
     </>
   );
 }

@@ -51,7 +51,7 @@ export default function PostCard({
         </div>
         {post.media && (
           <div className="py-1">
-            <Link href={`/image/${post.media.media}`}>
+            <Link href={`/post/${post.id}/media`}>
               <Image
                 src={getPublicUrl(post.media.media)}
                 width={1080}
@@ -62,7 +62,7 @@ export default function PostCard({
             </Link>
           </div>
         )}
-        <div className="mb-1">{post.description}</div>
+        <div className="-mt-1 mb-1">{post.description}</div>
         <PostCardActivities post={post} likedByLoginUser={likedByLoginUser} />
       </div>
     </div>
