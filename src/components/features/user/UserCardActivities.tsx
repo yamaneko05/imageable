@@ -75,9 +75,12 @@ export default function UserCardActivities({
             フォロー
           </Button>
         )}
-        <Button variants={{ size: "sm", color: "secondary" }}>
+        <LinkButton
+          href={`/profile/${user.id}/share`}
+          variants={{ size: "sm", color: "secondary" }}
+        >
           プロフィールをシェア
-        </Button>
+        </LinkButton>
       </div>
     </div>
   );

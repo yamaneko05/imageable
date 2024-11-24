@@ -93,4 +93,11 @@ export const validators = {
     });
     return validator;
   },
+  userIncludeProfile: (userId: string) => {
+    const validator = Prisma.validator<Prisma.UserFindUniqueArgs>()({
+      where: { id: userId },
+      include: { profile: true },
+    });
+    return validator;
+  },
 };

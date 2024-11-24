@@ -20,3 +20,7 @@ export type UserFollowing = Prisma.UserGetPayload<
 export type Comments = Prisma.CommentGetPayload<
   ReturnType<typeof validators.comments>
 >;
+
+export type UserincludeProfile = Prisma.UserGetPayload<
+  ReturnType<typeof validators.userIncludeProfile>
+>;

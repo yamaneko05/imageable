@@ -7,6 +7,7 @@ export const button = tv({
       primary: "bg-blue-500 hover:bg-blue-700",
       success: "bg-green-500 hover:bg-green-700",
       secondary: "bg-slate-500 hover:bg-slate-700",
+      smoke: "bg-slate-50 text-black hover:bg-slate-300",
     },
     variant: {
       outline: "border-2 bg-transparent",
@@ -83,5 +84,19 @@ export const modal = tv({
   },
   defaultVariants: {
     size: "md",
+  },
+});
+
+export const alert = tv({
+  base: "mb-4 flex gap-2 rounded-lg p-3",
+  variants: {
+    color: {
+      danger: "bg-red-200",
+      success: "bg-green-200",
+      smoke: "bg-slate-200",
+    },
+  },
+  defaultVariants: {
+    color: "success",
   },
 });

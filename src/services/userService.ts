@@ -13,6 +13,15 @@ export const userService = {
 
     return user;
   },
+  getUserByIdIncludeProfile: async (userId: string) => {
+    const prisma = new PrismaClient();
+
+    const user = await prisma.user.findUniqueOrThrow(
+      validators.userIncludeProfile(userId),
+    );
+
+    return user;
+  },
   getUserForProfilePage: async (userId: string) => {
     const prisma = new PrismaClient();
 
