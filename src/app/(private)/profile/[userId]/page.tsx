@@ -1,8 +1,8 @@
-import PostCard from "@/components/features/post/PostCard";
-import UserCard from "@/components/features/user/UserCard";
-import { getLoginUserId } from "@/heplers/getLoginUserId";
-import { likeService } from "@/services/likeService";
-import { userService } from "@/services/userService";
+import UserCard from "./_components/UserCard";
+import { Suspense } from "react";
+import UserPostLoading from "./_components/UserPostLoading";
+import UserPost from "./_components/UserPost";
+import getUserProfile from "./_services/getUserProfile";
 
 export default async function ProfilePage({
   params,
@@ -11,26 +11,14 @@ export default async function ProfilePage({
 }) {
   const { userId } = await params;
 
-  const user = await userService.getUserForProfilePage(userId);
-
-  const loginUserId = await getLoginUserId();
-
-  const likedByLoginUserPostIds =
-    await likeService.getLikedPostIdsByUserId(loginUserId);
+  const user = await getUserProfile(userId);
 
   return (
     <>
       <UserCard user={user} />
-      <div className="">
-        {user.posts.map((post) => (
-          <PostCard
-            loginUserId={loginUserId}
-            key={post.id}
-            post={post}
-            likedByLoginUser={likedByLoginUserPostIds.includes(post.id)}
-          />
-        ))}
-      </div>
+      <Suspense fallback={<UserPostLoading />}>
+        <UserPost userId={userId} />
+      </Suspense>
     </>
   );
 }

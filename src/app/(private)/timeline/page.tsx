@@ -1,15 +1,14 @@
 import PostCard from "@/components/features/post/PostCard";
 import { getLoginUserId } from "@/heplers/getLoginUserId";
-import { likeService } from "@/services/likeService";
-import { postService } from "@/services/postService";
+import getLikesPostId from "@/services/getLikesPostId";
+import getPosts from "./_services/getPosts";
 
 export default async function TimelinePage() {
-  const posts = await postService.getPostsForTimelinePage();
+  const posts = await getPosts();
 
   const loginUserId = await getLoginUserId();
 
-  const likedByLoginUserPostIds =
-    await likeService.getLikedPostIdsByUserId(loginUserId);
+  const likedByLoginUserPostIds = await getLikesPostId(loginUserId);
 
   return (
     <>

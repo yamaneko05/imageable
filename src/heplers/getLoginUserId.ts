@@ -1,10 +1,17 @@
-import { authService } from "../services/authService";
-import { userService } from "../services/userService";
+import { createClient } from "@/utils/supabase/server";
+import { PrismaClient } from "@prisma/client";
 
 export async function getLoginUserId() {
-  const loginUserAuthId = await authService.getLoginUserAuthId();
+  const supabase = await createClient();
 
-  const loginUser = await userService.getUserByAuthId(loginUserAuthId);
+  const authId = (await supabase.auth.getUser()).data.user!.id;
 
-  return loginUser.id;
+  const prisma = new PrismaClient();
+
+  const user = await prisma.user.findUniqueOrThrow({
+    where: { authId },
+    select: { id: true },
+  });
+
+  return user.id;
 }

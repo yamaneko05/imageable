@@ -4,11 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { signout } from "@/actions/auth";
 import { Avatar, Button } from "@/components/ui";
-import { navItems } from "@/constants";
 import { Profile } from "@prisma/client";
 import { usePathname } from "next/navigation";
+import { NavItem } from "@/types";
 
-export default function Sidebar({ profile }: { profile: Profile }) {
+export default function Sidebar({
+  profile,
+  navItems,
+}: {
+  profile: Profile;
+  navItems: NavItem[];
+}) {
   const pathname = usePathname();
 
   return (

@@ -1,17 +1,17 @@
 "use client";
 
 import { followAction, unfollowAction } from "@/actions/follow";
-import { UserForProfilePage } from "@/types";
 import { useState } from "react";
 import { Button, LinkButton } from "@/components/ui";
 import Link from "next/link";
+import { UserProfile } from "../_services/getUserProfile";
 
 export default function UserCardActivities({
   user,
   followedByLoginUser,
   loginUserId,
 }: {
-  user: UserForProfilePage;
+  user: UserProfile;
   followedByLoginUser: boolean;
   loginUserId: string;
 }) {

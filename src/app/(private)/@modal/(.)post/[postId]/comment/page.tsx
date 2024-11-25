@@ -1,7 +1,7 @@
-import CommentCard from "@/components/features/comment/CommentCard";
-import CreateCommentForm from "@/components/features/comment/CreateCommentForm";
+import CommentCard from "./_components/CommentCard";
+import CreateCommentForm from "./_components/CreateCommentForm";
 import { Modal } from "@/components/ui";
-import { commentService } from "@/services/commentService";
+import getComments from "./_services/getComments";
 
 export default async function PostPage({
   params,
@@ -9,7 +9,7 @@ export default async function PostPage({
   params: Promise<{ postId: string }>;
 }) {
   const postId = (await params).postId;
-  const comments = await commentService.getCommentsByPostId(postId);
+  const comments = await getComments(postId);
 
   return (
     <Modal title="コメント" variants={{ size: "lg" }}>

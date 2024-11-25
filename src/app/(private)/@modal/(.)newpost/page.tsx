@@ -1,15 +1,15 @@
-import CreatePostForm from "@/components/features/post/CreatePostForm";
+import CreatePostForm from "./_components/CreatePostForm";
 import { Modal } from "@/components/ui";
 import { getLoginUserId } from "@/heplers/getLoginUserId";
-import { profileService } from "@/services/profileService";
+import getProfileImage from "./_services/getProfileImage";
 
 export default async function NewpostPage() {
   const loginUserId = await getLoginUserId();
-  const profile = await profileService.getProfileByUserId(loginUserId);
+  const image = await getProfileImage(loginUserId);
 
   return (
     <Modal title="" variants={{ size: "lg" }}>
-      <CreatePostForm image={profile.image} />
+      <CreatePostForm image={image} />
     </Modal>
   );
 }

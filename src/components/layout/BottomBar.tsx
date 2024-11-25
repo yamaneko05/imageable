@@ -1,7 +1,7 @@
+import { NavItem } from "@/types";
 import Link from "next/link";
-import { navItems } from "@/constants";
 
-export default async function Bottombar() {
+export default async function Bottombar({ navItems }: { navItems: NavItem[] }) {
   return (
     <div className="fixed bottom-0 flex h-14 w-full items-center justify-center gap-4 border-t bg-white sm:hidden">
       {navItems.map((item) => (

@@ -1,5 +1,5 @@
 import SignUpStepper from "@/components/features/auth/SignUpStepper";
-import CreateProfileForm from "@/components/features/profile/CreateProfileForm";
+import CreateProfileForm from "./_components/CreateProfileForm";
 
 export default async function CreateProfilePage() {
   return (

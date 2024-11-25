@@ -1,10 +1,10 @@
 import { Avatar } from "@/components/ui";
-import { UserForProfilePage } from "@/types";
-import UserCardActivities from "./UserCardActivities";
 import { userService } from "@/services/userService";
 import { getLoginUserId } from "@/heplers/getLoginUserId";
+import UserCardActivities from "./UserCardActivities";
+import { UserProfile } from "../_services/getUserProfile";
 
-export default async function UserCard({ user }: { user: UserForProfilePage }) {
+export default async function UserCard({ user }: { user: UserProfile }) {
   const loginUserId = await getLoginUserId();
 
   const followedByLoginUser = await userService.firstIsFollowedBySecond(

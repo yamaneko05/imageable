@@ -1,6 +1,6 @@
-import CopyProfileUrl from "@/components/features/profile/CopyProfileUrl";
+import getUserProfile from "./_services/getUserProfile";
+import CopyProfileUrl from "./_components/CopyProfileUrl";
 import { Avatar, Modal } from "@/components/ui";
-import { userService } from "@/services/userService";
 import Image from "next/image";
 import QRCode from "qrcode";
 
@@ -11,7 +11,7 @@ export default async function ImagePage({
 }) {
   const userId = (await params).userId;
 
-  const user = await userService.getUserByIdIncludeProfile(userId);
+  const user = await getUserProfile(userId);
 
   const url = `${process.env.APP_URL}/profile/${userId}`;
 
