@@ -63,11 +63,19 @@ export async function deletePostAction(postId: string) {
     return { error: "この投稿を削除する権限がありません" };
   }
 
+  const deleteComments = prisma.comment.deleteMany({
+    where: { postId: postId },
+  });
   const deleteLikes = prisma.like.deleteMany({ where: { postId: postId } });
   const deleteMedia = prisma.media.deleteMany({ where: { postId: postId } });
   const deletePost = prisma.post.delete({ where: { id: postId } });
 
-  await prisma.$transaction([deleteLikes, deleteMedia, deletePost]);
+  await prisma.$transaction([
+    deleteComments,
+    deleteLikes,
+    deleteMedia,
+    deletePost,
+  ]);
 
   return { success: true };
 }
