@@ -22,4 +22,9 @@ export const validators = {
       },
     },
   }),
+  userIncludeProfile: Prisma.validator<Prisma.UserFindManyArgs>()({
+    include: {
+      profile: true,
+    },
+  }),
 };

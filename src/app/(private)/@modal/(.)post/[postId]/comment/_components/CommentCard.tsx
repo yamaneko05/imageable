@@ -1,8 +1,8 @@
 import { Avatar } from "@/components/ui";
-import { Comments } from "@/types";
 import Link from "next/link";
+import { Comment } from "../_services/getComments";
 
-export default function CommentCard({ comment }: { comment: Comments }) {
+export default function CommentCard({ comment }: { comment: Comment }) {
   return (
     <div key={comment.id} className="flex gap-3 py-2 first:pt-0 last:pb-0">
       <div className="pt-2">

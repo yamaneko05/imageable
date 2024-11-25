@@ -24,4 +24,4 @@ export default async function getComments(postId: string) {
   return comments;
 }
 
-export type Comments = Prisma.CommentGetPayload<ReturnType<typeof validator>>;
+export type Comment = Prisma.CommentGetPayload<ReturnType<typeof validator>>;

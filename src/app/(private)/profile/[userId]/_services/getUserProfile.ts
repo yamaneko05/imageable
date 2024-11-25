@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 
-export function userProfileValidator(userId: string) {
+function validator(userId: string) {
   return Prisma.validator<Prisma.UserFindUniqueOrThrowArgs>()({
     where: {
       id: userId,
@@ -21,13 +21,9 @@ export function userProfileValidator(userId: string) {
 export default async function getUserProfile(userId: string) {
   const prisma = new PrismaClient();
 
-  const user = await prisma.user.findUniqueOrThrow(
-    userProfileValidator(userId),
-  );
+  const user = await prisma.user.findUniqueOrThrow(validator(userId));
 
   return user;
 }
 
-export type UserProfile = Prisma.UserGetPayload<
-  ReturnType<typeof userProfileValidator>
->;
+export type UserProfile = Prisma.UserGetPayload<ReturnType<typeof validator>>;
