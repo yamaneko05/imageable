@@ -11,6 +11,7 @@ import { getPublicUrl } from "@/heplers/getPublicUrl";
 import { useState } from "react";
 import PostDropdown from "./PostDropdown";
 import Linkify from "linkify-react";
+import { linkifyOptions } from "@/utils/linkify";
 
 export default function PostCard({
   post,
@@ -37,7 +38,7 @@ export default function PostCard({
       </div>
       <div className="flex-1">
         <div className="flex justify-between">
-          <div className="flex items-center">
+          <div className="flex items-end">
             <div className="font-bold tracking-wide">
               {post.user.profile?.name}
             </div>
@@ -53,7 +54,7 @@ export default function PostCard({
           />
         </div>
         {post.media && (
-          <div className="py-1">
+          <div className="mt-1">
             <Link href={`/post/${post.id}/media`}>
               <Image
                 src={getPublicUrl(post.media.media)}
@@ -65,14 +66,12 @@ export default function PostCard({
             </Link>
           </div>
         )}
-        <div className="-mt-1 mb-2">
-          <Linkify
-            options={{ className: "text-blue-500 underline", nl2br: true }}
-          >
-            {post.description}
-          </Linkify>
+        <div className="mt-1">
+          <Linkify options={linkifyOptions}>{post.description}</Linkify>
         </div>
-        <PostCardActivities post={post} likedByLoginUser={likedByLoginUser} />
+        <div className="mt-2">
+          <PostCardActivities post={post} likedByLoginUser={likedByLoginUser} />
+        </div>
       </div>
     </div>
   ) : (

@@ -3,7 +3,6 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { LucideEllipsis, LucideTrash2 } from "lucide-react";
 import { deletePostAction } from "@/actions/post";
-import { button } from "@/variants";
 
 export default function PostDropdown({
   postId,
@@ -22,11 +21,13 @@ export default function PostDropdown({
   return (
     <Menu>
       <MenuButton>
-        <div className={button({ size: "sm", variant: "ghost" })}>
+        <div
+          className={`rounded px-2 py-1 hover:bg-slate-50 ${deleteable ? "" : "opacity-0"}`}
+        >
           <LucideEllipsis />
         </div>
       </MenuButton>
-      <MenuItems anchor="bottom" className="w-64 rounded-lg shadow-lg">
+      <MenuItems anchor="bottom" className="w-64 rounded-lg border shadow-lg">
         {deleteable && (
           <MenuItem>
             <button

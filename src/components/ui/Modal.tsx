@@ -4,7 +4,6 @@ import { type ElementRef, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui";
 import { LucideX } from "lucide-react";
-import { createPortal } from "react-dom";
 import { modal } from "@/variants";
 import { VariantProps } from "tailwind-variants";
 
@@ -30,7 +29,7 @@ export default function Modal({
     router.back();
   }
 
-  return createPortal(
+  return (
     <dialog ref={dialogRef} className={modal(variants)} onClose={onDismiss}>
       <div className="flex justify-between">
         <div className="text-lg font-bold">{title}</div>
@@ -39,7 +38,6 @@ export default function Modal({
         </Button>
       </div>
       <div className="mt-4">{children}</div>
-    </dialog>,
-    document.getElementById("modal-root")!,
+    </dialog>
   );
 }
